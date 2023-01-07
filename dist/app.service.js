@@ -8,34 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
-const openai_1 = require("openai");
 let AppService = class AppService {
     getHello() {
         return 'Hello Worlddd!';
-    }
-    async getOpenAI(question) {
-        const key = process.env.GPT_API_KEY;
-        const configuration = new openai_1.Configuration({
-            apiKey: key,
-        });
-        try {
-            const openai = new openai_1.OpenAIApi(configuration);
-            const completion = await openai.createCompletion({
-                model: 'text-davinci-003',
-                prompt: question,
-                max_tokens: 500,
-            }, {
-                timeout: 10000,
-                headers: {
-                    'Example-Header': 'example',
-                },
-            });
-            const data = completion.data.choices[0].text;
-            return data;
-        }
-        catch (error) {
-            console.log('ERROR', error);
-        }
     }
 };
 AppService = __decorate([

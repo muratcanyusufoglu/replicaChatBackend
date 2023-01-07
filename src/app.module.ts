@@ -1,13 +1,14 @@
-import { CacheModule, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { SocketController } from './socket/socket.controller';
-import { SocketService } from './socket/socket.service';
-import { SocketModule } from './socket/socket.module';
+import { AppController } from './app.controller';
+import { MessageModule } from './messages/message.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [SocketModule],
+  imports: [
+    MessageModule,
+    MongooseModule.forRoot('mongodb://localhost:27017/nest-course'),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
