@@ -18,7 +18,7 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             message_module_1.MessageModule,
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/nest-course'),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://mcy:XT2RSV60CIAdBngb@cluster0.il86p.mongodb.net/nestjs?retryWrites=true&w=majority'),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
