@@ -7,10 +7,9 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
+        forbidNonWhitelisted: true
     }));
-    await app.listen(3000);
+    await app.listen(3500);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

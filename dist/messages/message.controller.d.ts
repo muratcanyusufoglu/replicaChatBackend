@@ -7,7 +7,7 @@ export declare class MessageController {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     getOpenAI(question: string): Promise<any>;
-    create(createMessageDto: CreateMessageDto): import("./entities/messages.entity").Messages & {
+    create(createMessageDto: CreateMessageDto): Promise<import("./entities/messages.entity").Messages & {
         _id: import("mongoose").Types.ObjectId;
-    };
+    }>;
 }

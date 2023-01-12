@@ -32,7 +32,6 @@ export class MessageService {
 
   async getOpenAI(question: string): Promise<any> {
     const key = process.env.GPT_API_KEY;
-    console.log('key', key);
     const configuration = new Configuration({
       apiKey: key,
     });
@@ -46,14 +45,16 @@ export class MessageService {
           max_tokens: 500,
         },
         {
-          timeout: 10000,
+          timeout: 15000,
           headers: {
             'Example-Header': 'example',
           },
         },
       );
-      console.log('1234', completion.data.choices[0].text);
       const data = completion.data.choices[0].text;
+      console.log('data',data, completion);
+      if(data) {
+      }
       return data;
     } catch (error) {
       console.log('ERROR', error);
@@ -62,6 +63,6 @@ export class MessageService {
 
   create(createMessageDto: CreateMessageDto) {
     const message = new this.messageModel(createMessageDto);
-    return message;
+    return message.save();
   }
 }

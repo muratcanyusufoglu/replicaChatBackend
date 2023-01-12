@@ -11,7 +11,7 @@ export declare class MessageService {
         _id: import("mongoose").Types.ObjectId;
     }>;
     getOpenAI(question: string): Promise<any>;
-    create(createMessageDto: CreateMessageDto): Messages & {
+    create(createMessageDto: CreateMessageDto): Promise<Messages & {
         _id: import("mongoose").Types.ObjectId;
-    };
+    }>;
 }
