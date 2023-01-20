@@ -19,13 +19,7 @@ class MessageInfoDto {
 
 export class CreateMessageDto {
   @IsString()
-  readonly message: string;
-
-  @IsString()
   readonly user: string;
-
-  @IsString()
-  readonly date: string;
   
   @IsOptional()
   @Type(() => MessageInfoDto)

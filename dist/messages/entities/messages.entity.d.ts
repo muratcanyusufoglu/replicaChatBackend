@@ -30,9 +30,7 @@ declare class MessageData extends Document {
     date: string;
 }
 export declare class Messages extends Document {
-    message: string;
     user: string;
-    date: string;
     messageInfo: MessageData;
 }
 export declare const MessageSchema: import("mongoose").Schema<Messages, import("mongoose").Model<Messages, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Messages>;

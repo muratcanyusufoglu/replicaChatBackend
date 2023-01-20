@@ -38,15 +38,7 @@ let Messages = class Messages extends mongoose_2.Document {
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], Messages.prototype, "message", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
 ], Messages.prototype, "user", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], Messages.prototype, "date", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: MessageData }),
     __metadata("design:type", MessageData)

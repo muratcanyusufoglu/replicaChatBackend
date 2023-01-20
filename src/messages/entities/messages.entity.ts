@@ -19,13 +19,7 @@ class MessageData extends Document {
 @Schema()
 export class Messages extends Document {
   @Prop()
-  message: string;
-
-  @Prop()
   user: string;
-
-  @Prop()
-  date: string;
 
   @Prop({type: MessageData})
   messageInfo: MessageData

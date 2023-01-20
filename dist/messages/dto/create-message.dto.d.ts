@@ -5,9 +5,7 @@ declare class MessageInfoDto {
     readonly date: string;
 }
 export declare class CreateMessageDto {
-    readonly message: string;
     readonly user: string;
-    readonly date: string;
     readonly messageInfo: MessageInfoDto;
 }
 export {};
