@@ -1,5 +1,5 @@
 export declare class CreateDalleDto {
-    readonly message: string;
+    readonly prompt: string;
     readonly user: string;
     readonly response: string;
 }

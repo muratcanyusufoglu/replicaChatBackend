@@ -10,7 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateMessageDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
+class MessageInfoDto {
+}
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MessageInfoDto.prototype, "message", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MessageInfoDto.prototype, "user", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MessageInfoDto.prototype, "response", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MessageInfoDto.prototype, "date", void 0);
 class CreateMessageDto {
 }
 __decorate([
@@ -25,5 +44,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateMessageDto.prototype, "date", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => MessageInfoDto),
+    (0, class_validator_1.ValidateNested)(),
+    __metadata("design:type", MessageInfoDto)
+], CreateMessageDto.prototype, "messageInfo", void 0);
 exports.CreateMessageDto = CreateMessageDto;
 //# sourceMappingURL=create-message.dto.js.map

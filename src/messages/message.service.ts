@@ -45,7 +45,7 @@ export class MessageService {
           max_tokens: 500,
         },
         {
-          timeout: 15000,
+          timeout: 10000,
           headers: {
             'Example-Header': 'example',
           },
@@ -65,4 +65,5 @@ export class MessageService {
     const message = new this.messageModel(createMessageDto);
     return message.save();
   }
+  
 }

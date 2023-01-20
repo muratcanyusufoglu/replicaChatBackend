@@ -48,7 +48,7 @@ let MessageService = class MessageService {
                 prompt: question,
                 max_tokens: 500,
             }, {
-                timeout: 15000,
+                timeout: 10000,
                 headers: {
                     'Example-Header': 'example',
                 },

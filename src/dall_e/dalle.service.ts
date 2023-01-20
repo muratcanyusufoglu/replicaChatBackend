@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Number } from 'mongoose';
 import { CreateDalleDto } from './dto/create-dalle.dto';
 import { Dalle } from './entities/dalle.entity';
 
@@ -14,6 +14,8 @@ export class DalleService {
   ) {}
 
   findAll() {
+
+
     return this.dalleModel.find().exec();
   }
 
@@ -58,7 +60,7 @@ export class DalleService {
       }
       return image;
     } catch (error) {
-      console.log('ERROR', error);
+      console.log('ERROR getopenai answer', error);
     }
   }
 

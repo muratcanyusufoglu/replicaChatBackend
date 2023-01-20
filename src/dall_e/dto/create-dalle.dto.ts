@@ -2,7 +2,7 @@ import { IsDate, IsString } from 'class-validator';
 
 export class CreateDalleDto {
   @IsString()
-  readonly message: string;
+  readonly prompt: string;
 
   @IsString()
   readonly user: string;

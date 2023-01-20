@@ -60,7 +60,7 @@ let DalleService = class DalleService {
             return image;
         }
         catch (error) {
-            console.log('ERROR', error);
+            console.log('ERROR getopenai answer', error);
         }
     }
     create(createDalleDto) {
