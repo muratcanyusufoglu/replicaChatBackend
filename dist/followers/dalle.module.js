@@ -6,28 +6,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.DalleModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
-const app_controller_1 = require("./app.controller");
-const message_module_1 = require("./messages/message.module");
-const dalle_module_1 = require("./dall_e/dalle.module");
+const followers_controller_1 = require("./followers.controller");
+const followers_service_1 = require("./followers.service");
 const mongoose_1 = require("@nestjs/mongoose");
-const followers_module_1 = require("./followers/followers.module");
-const key = process.env.MONGODB_API_KEY;
-let AppModule = class AppModule {
+const dalle_entity_1 = require("./entities/dalle.entity");
+const config_1 = require("@nestjs/config");
+let DalleModule = class DalleModule {
 };
-AppModule = __decorate([
+DalleModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            message_module_1.MessageModule,
-            dalle_module_1.DalleModule,
-            followers_module_1.FollowModule,
-            mongoose_1.MongooseModule.forRoot(key)
+            mongoose_1.MongooseModule.forFeature([
+                {
+                    name: dalle_entity_1.Dalle.name,
+                    schema: dalle_entity_1.DalleSchema,
+                },
+            ]),
+            config_1.ConfigModule.forRoot(),
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [followers_controller_1.DalleController],
+        providers: [followers_service_1.DalleService],
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], DalleModule);
+exports.DalleModule = DalleModule;
+//# sourceMappingURL=dalle.module.js.map
