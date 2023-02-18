@@ -45,19 +45,19 @@ export class MessageService {
           max_tokens: 500,
         },
         {
-          timeout: 10000,
+          timeout: 30000,
           headers: {
             'Example-Header': 'example',
           },
         },
       );
       const data = completion.data.choices[0].text;
-      console.log('data',data, completion);
+      console.log('dataa',data, completion);
       if(data) {
       }
       return data;
     } catch (error) {
-      console.log('ERROR', error);
+      console.log('ERRORR', error);
     }
   }
 

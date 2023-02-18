@@ -11,7 +11,11 @@ export class Dalle extends Document {
   user: string;
 
   @Prop()
+  userId: string;
+ 
+  @Prop()
   response: string;
+
 }
 
 export const DalleSchema = SchemaFactory.createForClass(Dalle);

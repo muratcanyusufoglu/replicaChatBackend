@@ -26,6 +26,7 @@ import { Document } from 'mongoose';
 export declare class Dalle extends Document {
     prompt: string;
     user: string;
+    userId: string;
     response: string;
 }
 export declare const DalleSchema: import("mongoose").Schema<Dalle, import("mongoose").Model<Dalle, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Dalle>;

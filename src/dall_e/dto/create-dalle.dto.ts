@@ -8,5 +8,8 @@ export class CreateDalleDto {
   readonly user: string;
 
   @IsString()
+  readonly userId: string;
+
+  @IsString()
   readonly response: string;
 }

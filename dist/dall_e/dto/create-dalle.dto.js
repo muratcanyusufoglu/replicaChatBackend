@@ -24,6 +24,10 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
+], CreateDalleDto.prototype, "userId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreateDalleDto.prototype, "response", void 0);
 exports.CreateDalleDto = CreateDalleDto;
 //# sourceMappingURL=create-dalle.dto.js.map
