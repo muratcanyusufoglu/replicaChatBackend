@@ -28,5 +28,6 @@ export declare class Dalle extends Document {
     user: string;
     userId: string;
     response: string;
+    likeNumber: number;
 }
 export declare const DalleSchema: import("mongoose").Schema<Dalle, import("mongoose").Model<Dalle, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Dalle>;

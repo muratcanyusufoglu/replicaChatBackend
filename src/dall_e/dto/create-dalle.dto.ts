@@ -1,4 +1,4 @@
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsString } from 'class-validator';
 
 export class CreateDalleDto {
   @IsString()
@@ -12,4 +12,7 @@ export class CreateDalleDto {
 
   @IsString()
   readonly response: string;
+
+  @IsNumber()
+  readonly likeNumber: number;
 }

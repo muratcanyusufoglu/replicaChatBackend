@@ -30,6 +30,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Dalle.prototype, "response", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Dalle.prototype, "likeNumber", void 0);
 Dalle = __decorate([
     (0, mongoose_1.Schema)()
 ], Dalle);

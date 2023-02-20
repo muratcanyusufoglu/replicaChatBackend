@@ -63,6 +63,15 @@ let DalleService = class DalleService {
             console.log('ERROR getopenai answer', error);
         }
     }
+    async update(id, updateDalleDto) {
+        const existingDalle = await this.dalleModel
+            .findOneAndUpdate({ _id: id }, { $set: updateDalleDto }, { new: true })
+            .exec();
+        if (!existingDalle) {
+            throw new common_1.NotFoundException(`Image ${id} not found`);
+        }
+        return existingDalle;
+    }
     create(createDalleDto) {
         const image = new this.dalleModel(createDalleDto);
         return image.save();

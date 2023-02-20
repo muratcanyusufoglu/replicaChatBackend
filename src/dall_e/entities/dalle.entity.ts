@@ -16,6 +16,9 @@ export class Dalle extends Document {
   @Prop()
   response: string;
 
+  @Prop()
+  likeNumber: number;
+
 }
 
 export const DalleSchema = SchemaFactory.createForClass(Dalle);

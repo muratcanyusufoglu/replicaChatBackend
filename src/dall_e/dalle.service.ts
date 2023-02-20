@@ -5,6 +5,7 @@ import { CreateDalleDto } from './dto/create-dalle.dto';
 import { Dalle } from './entities/dalle.entity';
 
 import { Configuration, OpenAIApi } from 'openai';
+import { UpdateDalleDto } from './dto/update-dalle.dto';
 
 @Injectable()
 export class DalleService {
@@ -62,6 +63,18 @@ export class DalleService {
     } catch (error) {
       console.log('ERROR getopenai answer', error);
     }
+  }
+
+  async update(id:string, updateDalleDto: UpdateDalleDto){
+      const existingDalle = await this.dalleModel
+      .findOneAndUpdate({_id: id},  {$set: updateDalleDto}, {new:true})
+      .exec();
+
+      if(!existingDalle){
+        throw new NotFoundException(`Image ${id} not found`)
+      }
+      return existingDalle;
+    
   }
 
   create(createDalleDto: CreateDalleDto) {

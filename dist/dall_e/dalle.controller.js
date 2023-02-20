@@ -16,6 +16,7 @@ exports.DalleController = void 0;
 const common_1 = require("@nestjs/common");
 const dalle_service_1 = require("./dalle.service");
 const create_dalle_dto_1 = require("./dto/create-dalle.dto");
+const update_dalle_dto_1 = require("./dto/update-dalle.dto");
 let DalleController = class DalleController {
     constructor(dalleService) {
         this.dalleService = dalleService;
@@ -29,6 +30,9 @@ let DalleController = class DalleController {
     create(createDalleDto) {
         console.log(createDalleDto instanceof create_dalle_dto_1.CreateDalleDto);
         return this.dalleService.create(createDalleDto);
+    }
+    update(id, updateDalleDto) {
+        return this.dalleService.update(id, updateDalleDto);
     }
 };
 __decorate([
@@ -52,6 +56,14 @@ __decorate([
     __metadata("design:paramtypes", [create_dalle_dto_1.CreateDalleDto]),
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_dalle_dto_1.UpdateDalleDto]),
+    __metadata("design:returntype", void 0)
+], DalleController.prototype, "update", null);
 DalleController = __decorate([
     (0, common_1.Controller)('dalle'),
     __metadata("design:paramtypes", [dalle_service_1.DalleService])

@@ -3,4 +3,5 @@ export declare class CreateDalleDto {
     readonly user: string;
     readonly userId: string;
     readonly response: string;
+    readonly likeNumber: number;
 }
