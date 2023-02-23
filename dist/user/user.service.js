@@ -27,7 +27,7 @@ let UserService = class UserService {
     async findOne(userId) {
         const user = await this.userModule
             .findOne({
-            _userId: userId,
+            userId: userId,
         })
             .exec();
         if (!user) {
@@ -35,12 +35,12 @@ let UserService = class UserService {
         }
         return user;
     }
-    async update(id, updateUserDto) {
+    async update(userId, updateUserDto) {
         const existingDalle = await this.userModule
-            .findOneAndUpdate({ _id: id }, { $set: updateUserDto }, { new: true })
+            .findOneAndUpdate({ userId: userId }, { $set: updateUserDto }, { new: true })
             .exec();
         if (!existingDalle) {
-            throw new common_1.NotFoundException(`Image ${id} not found`);
+            throw new common_1.NotFoundException(`Image ${userId} not found`);
         }
         return existingDalle;
     }

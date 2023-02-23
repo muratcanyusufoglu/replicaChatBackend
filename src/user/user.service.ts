@@ -20,7 +20,7 @@ export class UserService {
   async findOne(userId: string) {
     const user = await this.userModule
       .findOne({
-        _userId: userId, // where id is your column name
+        userId: userId, // where id is your column name
       })
       .exec();
     if (!user) {
@@ -30,13 +30,13 @@ export class UserService {
     return user;
   }
 
-  async update(id:string, updateUserDto: UpdateUserDto){
+  async update(userId:string, updateUserDto: UpdateUserDto){
     const existingDalle = await this.userModule
-    .findOneAndUpdate({_id: id},  {$set: updateUserDto}, {new:true})
+    .findOneAndUpdate({ userId: userId},  {$set: updateUserDto}, {new:true})
     .exec();
 
     if(!existingDalle){
-      throw new NotFoundException(`Image ${id} not found`)
+      throw new NotFoundException(`Image ${userId} not found`)
     }
     return existingDalle;
   

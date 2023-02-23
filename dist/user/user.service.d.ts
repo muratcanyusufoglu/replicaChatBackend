@@ -11,7 +11,7 @@ export declare class UserService {
     findOne(userId: string): Promise<User & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    update(id: string, updateUserDto: UpdateUserDto): Promise<User & {
+    update(userId: string, updateUserDto: UpdateUserDto): Promise<User & {
         _id: import("mongoose").Types.ObjectId;
     }>;
     create(createUserDto: CreateUserDto): Promise<User & {
