@@ -21,11 +21,11 @@ export class FollowController {
     return this.followService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   console.log(typeof id);
-  //   return this.followService.findOne(id);
-  // }
+  @Get(':id')
+   findOne(@Param('id') followerId: string) {
+     console.log(typeof followerId);
+     return this.followService.findOne(followerId);
+   }
 
   @Post()
   create(@Body() createFollowDto: CreateFollowDto) {

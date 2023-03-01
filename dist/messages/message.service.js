@@ -43,17 +43,16 @@ let MessageService = class MessageService {
         });
         try {
             const openai = new openai_1.OpenAIApi(configuration);
-            const completion = await openai.createCompletion({
-                model: 'text-davinci-003',
-                prompt: question,
-                max_tokens: 500,
+            const completion = await openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: question }],
             }, {
                 timeout: 30000,
                 headers: {
                     'Example-Header': 'example',
                 },
             });
-            const data = completion.data.choices[0].text;
+            const data = completion.data.choices[0].message;
             console.log('dataa', data, completion);
             if (data) {
             }

@@ -36,7 +36,7 @@
     "joi": "^17.7.0",
     "mongoose": "^6.8.2",
     "nodemon": "^2.0.20",
-    "openai": "^3.1.0",
+    "openai": "^3.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

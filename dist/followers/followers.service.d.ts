@@ -7,9 +7,9 @@ export declare class FollowService {
     findAll(): Promise<(Follow & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
-    findOne(id: string): Promise<Follow & {
+    findOne(id: string): Promise<(Follow & {
         _id: import("mongoose").Types.ObjectId;
-    }>;
+    })[]>;
     create(createFollowDto: CreateFollowDto): Promise<Follow & {
         _id: import("mongoose").Types.ObjectId;
     }>;

@@ -18,16 +18,16 @@ export class FollowService {
   }
 
   async findOne(id: string) {
-    const message = await this.followModule
-      .findOne({
-        _id: id, // where id is your column name
+    const followerInfo = await this.followModule
+      .find({
+        followerId: id, // where id is your column name
       })
       .exec();
-    if (!message) {
-      //throw new HttpException(`message #${id} not found`, HttpStatus.NOT_FOUND);
-      throw new NotFoundException(`message #${id} not found`);
+    if (!followerInfo) {
+      //throw new HttpException(`followerInfo #${id} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`followerInfo #${id} not found`);
     }
-    return message;
+    return followerInfo;
   }
 
 

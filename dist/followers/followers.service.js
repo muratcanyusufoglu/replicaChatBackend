@@ -25,15 +25,15 @@ let FollowService = class FollowService {
         return this.followModule.find().exec();
     }
     async findOne(id) {
-        const message = await this.followModule
-            .findOne({
-            _id: id,
+        const followerInfo = await this.followModule
+            .find({
+            followerId: id,
         })
             .exec();
-        if (!message) {
-            throw new common_1.NotFoundException(`message #${id} not found`);
+        if (!followerInfo) {
+            throw new common_1.NotFoundException(`followerInfo #${id} not found`);
         }
-        return message;
+        return followerInfo;
     }
     create(createFollowDto) {
         const image = new this.followModule(createFollowDto);

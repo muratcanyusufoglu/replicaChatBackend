@@ -38,11 +38,12 @@ export class MessageService {
     try {
       const openai = new OpenAIApi(configuration);
 
-      const completion = await openai.createCompletion(
+      const completion = await openai.createChatCompletion(
         {
-          model: 'text-davinci-003',
-          prompt: question,
-          max_tokens: 500,
+          model: "gpt-3.5-turbo",
+          messages: [{role: "user", content: question}],
+          //prompt: question,
+          //max_tokens: 500,
         },
         {
           timeout: 30000,
@@ -51,7 +52,7 @@ export class MessageService {
           },
         },
       );
-      const data = completion.data.choices[0].text;
+      const data =completion.data.choices[0].message;
       console.log('dataa',data, completion);
       if(data) {
       }

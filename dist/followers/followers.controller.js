@@ -23,6 +23,10 @@ let FollowController = class FollowController {
     findAll(paginationQuery) {
         return this.followService.findAll();
     }
+    findOne(followerId) {
+        console.log(typeof followerId);
+        return this.followService.findOne(followerId);
+    }
     create(createFollowDto) {
         console.log(createFollowDto instanceof create_followers_dto_1.CreateFollowDto);
         return this.followService.create(createFollowDto);
@@ -35,6 +39,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FollowController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FollowController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
