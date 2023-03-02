@@ -16,6 +16,7 @@ exports.FollowController = void 0;
 const common_1 = require("@nestjs/common");
 const followers_service_1 = require("./followers.service");
 const create_followers_dto_1 = require("./dto/create-followers.dto");
+const update_followers_dto_1 = require("./dto/update-followers.dto");
 let FollowController = class FollowController {
     constructor(followService) {
         this.followService = followService;
@@ -30,6 +31,12 @@ let FollowController = class FollowController {
     create(createFollowDto) {
         console.log(createFollowDto instanceof create_followers_dto_1.CreateFollowDto);
         return this.followService.create(createFollowDto);
+    }
+    update(id, updateFollowersDto) {
+        return this.followService.update(id, updateFollowersDto);
+    }
+    remove(followId, followerId) {
+        return this.followService.remove(followId, followerId);
     }
 };
 __decorate([
@@ -53,6 +60,22 @@ __decorate([
     __metadata("design:paramtypes", [create_followers_dto_1.CreateFollowDto]),
     __metadata("design:returntype", void 0)
 ], FollowController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_followers_dto_1.UpdateFollowersDto]),
+    __metadata("design:returntype", void 0)
+], FollowController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)('deleteUser/:followId/:followerId'),
+    __param(0, (0, common_1.Param)('followId')),
+    __param(1, (0, common_1.Param)('followerId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], FollowController.prototype, "remove", null);
 FollowController = __decorate([
     (0, common_1.Controller)('follower'),
     __metadata("design:paramtypes", [followers_service_1.FollowService])

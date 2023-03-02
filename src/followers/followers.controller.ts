@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { FollowService } from './followers.service';
 import { CreateFollowDto } from './dto/create-followers.dto';
-//import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { UpdateFollowersDto } from './dto/update-followers.dto';
 
 @Controller('follower')
 export class FollowController {
@@ -31,5 +31,15 @@ export class FollowController {
   create(@Body() createFollowDto: CreateFollowDto) {
     console.log(createFollowDto instanceof CreateFollowDto);
     return this.followService.create(createFollowDto);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id:string, @Body() updateFollowersDto:UpdateFollowersDto){
+    return this.followService.update(id, updateFollowersDto);
+  }
+
+  @Delete('deleteUser/:followId/:followerId')
+  remove(@Param('followId') followId: string, @Param('followerId') followerId: string) {
+    return this.followService.remove(followId, followerId);
   }
 }

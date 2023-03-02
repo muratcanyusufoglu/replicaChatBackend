@@ -35,9 +35,34 @@ let FollowService = class FollowService {
         }
         return followerInfo;
     }
+    async findOneIdes(followId, followerId) {
+        const followerInfo = await this.followModule
+            .findOne({
+            followingId: followId,
+            followerId: followerId
+        })
+            .exec();
+        if (!followerInfo) {
+            throw new common_1.NotFoundException(`followerInfo # not found`);
+        }
+        return followerInfo;
+    }
+    async update(id, updateFollowersDto) {
+        const existingFollow = await this.followModule
+            .findOneAndUpdate({ _id: id }, { $set: updateFollowersDto }, { new: true })
+            .exec();
+        if (!existingFollow) {
+            throw new common_1.NotFoundException(`Image ${id} not found`);
+        }
+        return existingFollow;
+    }
     create(createFollowDto) {
         const image = new this.followModule(createFollowDto);
         return image.save();
+    }
+    async remove(followId, followerId) {
+        const coffee = await this.findOneIdes(followId, followerId);
+        return this.followModule.remove(coffee);
     }
 };
 FollowService = __decorate([
