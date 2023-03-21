@@ -30,6 +30,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Follow.prototype, "followingId", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Follow.prototype, "followingPhoto", void 0);
 Follow = __decorate([
     (0, mongoose_1.Schema)()
 ], Follow);

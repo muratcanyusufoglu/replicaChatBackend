@@ -28,12 +28,19 @@ let FollowController = class FollowController {
         console.log(typeof followerId);
         return this.followService.findOne(followerId);
     }
+    findOneAllInfo(followerId) {
+        console.log(typeof followerId);
+        return this.followService.findOneAllInfo(followerId);
+    }
     create(createFollowDto) {
         console.log(createFollowDto instanceof create_followers_dto_1.CreateFollowDto);
         return this.followService.create(createFollowDto);
     }
     update(id, updateFollowersDto) {
         return this.followService.update(id, updateFollowersDto);
+    }
+    addFollowingId(followerId, updateFollowersDto) {
+        return this.followService.update(followerId, updateFollowersDto);
     }
     remove(followId, followerId) {
         return this.followService.remove(followId, followerId);
@@ -54,6 +61,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FollowController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Get)('withInfos/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FollowController.prototype, "findOneAllInfo", null);
+__decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -68,6 +82,14 @@ __decorate([
     __metadata("design:paramtypes", [String, update_followers_dto_1.UpdateFollowersDto]),
     __metadata("design:returntype", void 0)
 ], FollowController.prototype, "update", null);
+__decorate([
+    (0, common_1.Patch)('addFollowingId:followerId'),
+    __param(0, (0, common_1.Param)('followerId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_followers_dto_1.UpdateFollowersDto]),
+    __metadata("design:returntype", void 0)
+], FollowController.prototype, "addFollowingId", null);
 __decorate([
     (0, common_1.Delete)('deleteUser/:followId/:followerId'),
     __param(0, (0, common_1.Param)('followId')),

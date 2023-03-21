@@ -36,6 +36,30 @@ let DalleService = class DalleService {
         }
         return message;
     }
+    async findFromUserId(userId) {
+        const message = await this.dalleModel
+            .find({
+            userId: userId,
+        })
+            .exec();
+        if (!message) {
+            throw new common_1.NotFoundException(`message #${userId} not found`);
+        }
+        return message;
+    }
+    async findFromUserIds(userIds) {
+        console.log('userIdsss', userIds);
+        let userss = userIds.split(',');
+        const message = await this.dalleModel
+            .find({
+            userId: { $in: userss },
+        })
+            .exec();
+        if (!message) {
+            throw new common_1.NotFoundException(`message #${message} not found`);
+        }
+        return message;
+    }
     async getOpenAI(prompt) {
         const key = process.env.GPT_API_KEY;
         const configuration = new openai_1.Configuration({

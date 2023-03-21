@@ -28,5 +28,6 @@ export declare class Follow extends Document {
     following: string;
     followerId: string;
     followingId: string;
+    followingPhoto: string;
 }
 export declare const FollowSchema: import("mongoose").Schema<Follow, import("mongoose").Model<Follow, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Follow>;

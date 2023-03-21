@@ -19,6 +19,23 @@ export class FollowService {
   }
 
   async findOne(id: string) {
+
+    const userIds =[];
+    const followerInfo = await this.followModule
+      .find({
+        followerId: id, // where id is your column name
+      })
+      .exec();
+    if (!followerInfo) {
+      //throw new HttpException(`followerInfo #${id} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`followerInfo #${id} not found`);
+    }
+
+    userIds.push(followerInfo.map(user => {return user.followingId}))//followerInfo.map(user => user.followingId);
+    return userIds;
+  }
+
+  async findOneAllInfo(id: string) {
     const followerInfo = await this.followModule
       .find({
         followerId: id, // where id is your column name
@@ -54,8 +71,18 @@ export class FollowService {
       throw new NotFoundException(`Image ${id} not found`)
     }
     return existingFollow;
-  
-}
+  }
+
+  async addFollowingId(followerId:string, updateFollowersDto: UpdateFollowersDto){
+    const existingFollow = await this.followModule
+    .findOneAndUpdate({followerId: followerId},  {$set: updateFollowersDto}, {new:true})
+    .exec();
+
+    if(!existingFollow){
+      throw new NotFoundException(`Image ${followerId} not found`)
+    }
+    return existingFollow;
+  }
 
 
   create(createFollowDto: CreateFollowDto) {

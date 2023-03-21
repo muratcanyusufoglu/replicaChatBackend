@@ -6,6 +6,7 @@ import { Dalle } from './entities/dalle.entity';
 
 import { Configuration, OpenAIApi } from 'openai';
 import { UpdateDalleDto } from './dto/update-dalle.dto';
+import { UserSchema } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class DalleService {
@@ -15,8 +16,6 @@ export class DalleService {
   ) {}
 
   findAll() {
-
-
     return this.dalleModel.find().exec();
   }
 
@@ -29,6 +28,41 @@ export class DalleService {
     if (!message) {
       //throw new HttpException(`message #${id} not found`, HttpStatus.NOT_FOUND);
       throw new NotFoundException(`message #${id} not found`);
+    }
+    return message;
+  }
+
+  async findFromUserId(userId: string) {
+    const message = await this.dalleModel
+      .find({
+        userId: userId, // where id is your column name
+      })
+      .exec();
+    if (!message) {
+      //throw new HttpException(`message #${id} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`message #${userId} not found`);
+    }
+    return message;
+  }
+
+  async findFromUserIds(userIds: string) {
+    console.log('userIdsss', userIds)
+    //const dalleLast = [];
+    //userIds.map(item => dalleLast.push(this.findFromUserId(item)));
+     // console.log('userIds', userIds.join(''));
+    //userIds.map(userIds=>console.log('item', userIds))
+    //var manufacturerParam = userIds.split(",")
+    let userss = userIds.split(',');
+
+
+    const message = await this.dalleModel
+      .find({
+        userId: {$in:userss}, // where id is your column name
+      })
+      .exec();
+    if (!message) {
+      //throw new HttpException(`message #${id} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`message #${message} not found`);
     }
     return message;
   }

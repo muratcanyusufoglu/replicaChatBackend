@@ -27,6 +27,12 @@ let DalleController = class DalleController {
     getOpenAI(question) {
         return this.dalleService.getOpenAI(question);
     }
+    findFromUserId(userId) {
+        return this.dalleService.findFromUserId(userId);
+    }
+    findFromUserIds(userIds) {
+        return this.dalleService.findFromUserIds(userIds);
+    }
     create(createDalleDto) {
         console.log(createDalleDto instanceof create_dalle_dto_1.CreateDalleDto);
         return this.dalleService.create(createDalleDto);
@@ -49,6 +55,20 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "getOpenAI", null);
+__decorate([
+    (0, common_1.Get)('findFollowingImages/:userId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DalleController.prototype, "findFromUserId", null);
+__decorate([
+    (0, common_1.Get)('findFollowingWithArray/:userIds'),
+    __param(0, (0, common_1.Param)('userIds')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DalleController.prototype, "findFromUserIds", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

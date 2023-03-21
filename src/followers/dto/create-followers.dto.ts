@@ -11,5 +11,10 @@ export class CreateFollowDto {
   readonly followerId: string;
 
   @IsString()
-  readonly followingId: string;
+  readonly followingId: string [];
+
+  @IsString()
+  readonly followingPhoto: string;
+
+  
 }

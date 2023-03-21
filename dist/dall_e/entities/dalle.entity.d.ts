@@ -27,6 +27,7 @@ export declare class Dalle extends Document {
     prompt: string;
     user: string;
     userId: string;
+    userPhoto: string;
     response: string;
     likeNumber: number;
 }

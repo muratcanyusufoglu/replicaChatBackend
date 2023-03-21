@@ -11,6 +11,9 @@ export class CreateDalleDto {
   readonly userId: string;
 
   @IsString()
+  readonly userPhoto: string;
+
+  @IsString()
   readonly response: string;
 
   @IsNumber()

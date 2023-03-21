@@ -25,6 +25,19 @@ let FollowService = class FollowService {
         return this.followModule.find().exec();
     }
     async findOne(id) {
+        const userIds = [];
+        const followerInfo = await this.followModule
+            .find({
+            followerId: id,
+        })
+            .exec();
+        if (!followerInfo) {
+            throw new common_1.NotFoundException(`followerInfo #${id} not found`);
+        }
+        userIds.push(followerInfo.map(user => { return user.followingId; }));
+        return userIds;
+    }
+    async findOneAllInfo(id) {
         const followerInfo = await this.followModule
             .find({
             followerId: id,
@@ -53,6 +66,15 @@ let FollowService = class FollowService {
             .exec();
         if (!existingFollow) {
             throw new common_1.NotFoundException(`Image ${id} not found`);
+        }
+        return existingFollow;
+    }
+    async addFollowingId(followerId, updateFollowersDto) {
+        const existingFollow = await this.followModule
+            .findOneAndUpdate({ followerId: followerId }, { $set: updateFollowersDto }, { new: true })
+            .exec();
+        if (!existingFollow) {
+            throw new common_1.NotFoundException(`Image ${followerId} not found`);
         }
         return existingFollow;
     }

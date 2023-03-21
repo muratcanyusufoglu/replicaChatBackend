@@ -26,6 +26,12 @@ export class FollowController {
      console.log(typeof followerId);
      return this.followService.findOne(followerId);
    }
+  
+  @Get('withInfos/:id')
+  findOneAllInfo(@Param('id') followerId: string) {
+     console.log(typeof followerId);
+     return this.followService.findOneAllInfo(followerId);
+   }
 
   @Post()
   create(@Body() createFollowDto: CreateFollowDto) {
@@ -36,6 +42,11 @@ export class FollowController {
   @Patch(':id')
   update(@Param('id') id:string, @Body() updateFollowersDto:UpdateFollowersDto){
     return this.followService.update(id, updateFollowersDto);
+  }
+
+  @Patch('addFollowingId:followerId')
+  addFollowingId(@Param('followerId') followerId:string, @Body() updateFollowersDto:UpdateFollowersDto){
+    return this.followService.update(followerId, updateFollowersDto);
   }
 
   @Delete('deleteUser/:followId/:followerId')

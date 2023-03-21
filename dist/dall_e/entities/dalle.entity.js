@@ -29,6 +29,10 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
+], Dalle.prototype, "userPhoto", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
 ], Dalle.prototype, "response", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),

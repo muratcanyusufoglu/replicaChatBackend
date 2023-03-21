@@ -11,6 +11,12 @@ export declare class DalleService {
     findOne(id: string): Promise<Dalle & {
         _id: import("mongoose").Types.ObjectId;
     }>;
+    findFromUserId(userId: string): Promise<(Dalle & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
+    findFromUserIds(userIds: string): Promise<(Dalle & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
     getOpenAI(prompt: string): Promise<any>;
     update(id: string, updateDalleDto: UpdateDalleDto): Promise<Dalle & {
         _id: import("mongoose").Types.ObjectId;

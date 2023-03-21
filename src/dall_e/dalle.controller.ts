@@ -33,6 +33,16 @@ export class DalleController {
     return this.dalleService.getOpenAI(question);
   }
 
+  @Get('findFollowingImages/:userId')
+  findFromUserId(@Param('userId') userId: string) {
+    return this.dalleService.findFromUserId(userId);
+  }
+
+  @Get('findFollowingWithArray/:userIds')
+  findFromUserIds(@Param('userIds') userIds: string) {
+    return this.dalleService.findFromUserIds(userIds);
+  }
+
   @Post()
   create(@Body() createDalleDto: CreateDalleDto) {
     console.log(createDalleDto instanceof CreateDalleDto);

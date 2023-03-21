@@ -27,7 +27,11 @@ __decorate([
 ], CreateFollowDto.prototype, "followerId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Array)
 ], CreateFollowDto.prototype, "followingId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateFollowDto.prototype, "followingPhoto", void 0);
 exports.CreateFollowDto = CreateFollowDto;
 //# sourceMappingURL=create-followers.dto.js.map

@@ -8,13 +8,17 @@ export declare class FollowService {
     findAll(): Promise<(Follow & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
-    findOne(id: string): Promise<(Follow & {
+    findOne(id: string): Promise<any[]>;
+    findOneAllInfo(id: string): Promise<(Follow & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     findOneIdes(followId: string, followerId: string): Promise<Follow & {
         _id: import("mongoose").Types.ObjectId;
     }>;
     update(id: string, updateFollowersDto: UpdateFollowersDto): Promise<Follow & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    addFollowingId(followerId: string, updateFollowersDto: UpdateFollowersDto): Promise<Follow & {
         _id: import("mongoose").Types.ObjectId;
     }>;
     create(createFollowDto: CreateFollowDto): Promise<Follow & {

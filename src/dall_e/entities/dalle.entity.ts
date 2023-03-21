@@ -12,6 +12,9 @@ export class Dalle extends Document {
 
   @Prop()
   userId: string;
+
+  @Prop()
+  userPhoto: string;
  
   @Prop()
   response: string;
