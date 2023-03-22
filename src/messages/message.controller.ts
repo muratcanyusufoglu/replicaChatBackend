@@ -32,6 +32,11 @@ export class MessageController {
     return this.messageService.getOpenAI(question);
   }
 
+  @Get('getPersonalChat/:userId')
+  findPersonalChat(@Param('userId') userId: string) {
+    return this.messageService.findPersonalChat(userId);
+  }
+
   @Post()
   create(@Body() createMessageDto: CreateMessageDto) {
     console.log(createMessageDto instanceof CreateMessageDto);

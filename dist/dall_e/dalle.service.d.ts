@@ -4,6 +4,7 @@ import { Dalle } from './entities/dalle.entity';
 import { UpdateDalleDto } from './dto/update-dalle.dto';
 export declare class DalleService {
     private readonly dalleModel;
+    httpService: any;
     constructor(dalleModel: Model<Dalle>);
     findAll(): Promise<(Dalle & {
         _id: import("mongoose").Types.ObjectId;
@@ -17,6 +18,7 @@ export declare class DalleService {
     findFromUserIds(userIds: string): Promise<(Dalle & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
+    download(imageUrl: string): Promise<void>;
     getOpenAI(prompt: string): Promise<any>;
     update(id: string, updateDalleDto: UpdateDalleDto): Promise<Dalle & {
         _id: import("mongoose").Types.ObjectId;

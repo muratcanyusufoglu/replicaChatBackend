@@ -7,9 +7,12 @@ import { Dalle } from './entities/dalle.entity';
 import { Configuration, OpenAIApi } from 'openai';
 import { UpdateDalleDto } from './dto/update-dalle.dto';
 import { UserSchema } from 'src/user/entities/user.entity';
+import { createWriteStream } from 'fs';
+import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class DalleService {
+  httpService: any;
   constructor(
     @InjectModel(Dalle.name)
     private readonly dalleModel: Model<Dalle>,
@@ -67,6 +70,51 @@ export class DalleService {
     return message;
   }
 
+  async download(imageUrl: string) {
+
+// Or with cookies
+// var request = require('request').defaults({jar: true});
+
+
+//await request.get('https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png')
+//.on('error',function(err){
+// console.log(err);
+//})
+//.on('response',function(response){
+// if(response.statusCode == 200){
+//  console.log("successfully retreived image from url")
+/// }
+//})
+//.pipe(fs.createWriteStream('C:\Users\Administrator\Pictures' + 'filename'));
+
+var fs = require('fs'),
+    request = require('request');
+
+var downloadItem = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){ 
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
+await downloadItem('https://www.google.com/images/srpr/logo3w.png', 'C:/Users/Administrator/Pictures/image.png', function(){
+  console.log('done');
+});
+//await request.get({url: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png', encoding: 'binary'}, function (err, response, body) {
+  //fs.createWriteStream("C:\Users\Administrator\Pictures", body, {encoding: 'binary'}, function(err) {
+    //if(err){
+      //console.log(err);
+      //return 'error';}  
+    //else{
+      //console.log("The file was saved!");
+      //return 'saved'
+    //}
+  //}); 
+//})
+}
+
   async getOpenAI(prompt: string): Promise<any> {
     const key = process.env.GPT_API_KEY;
     const configuration = new Configuration({
@@ -89,6 +137,7 @@ export class DalleService {
         },
       );
       const image = response.data.data[0].url;
+
 
       console.log('data',image, response);
       if(image) {
@@ -116,3 +165,4 @@ export class DalleService {
     return image.save();
   }
 }
+

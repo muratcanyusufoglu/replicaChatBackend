@@ -60,6 +60,19 @@ let DalleService = class DalleService {
         }
         return message;
     }
+    async download(imageUrl) {
+        var fs = require('fs'), request = require('request');
+        var downloadItem = function (uri, filename, callback) {
+            request.head(uri, function (err, res, body) {
+                console.log('content-type:', res.headers['content-type']);
+                console.log('content-length:', res.headers['content-length']);
+                request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+            });
+        };
+        await downloadItem('https://www.google.com/images/srpr/logo3w.png', 'C:/Users/Administrator/Pictures/image.png', function () {
+            console.log('done');
+        });
+    }
     async getOpenAI(prompt) {
         const key = process.env.GPT_API_KEY;
         const configuration = new openai_1.Configuration({

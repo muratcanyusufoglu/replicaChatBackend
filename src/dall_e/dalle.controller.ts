@@ -15,6 +15,7 @@ import { UpdateDalleDto } from './dto/update-dalle.dto';
 
 @Controller('dalle')
 export class DalleController {
+  httpService: any;
   constructor(private readonly dalleService: DalleService) {}
 
   @Get()
@@ -22,18 +23,12 @@ export class DalleController {
     return this.dalleService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   console.log(typeof id);
-  //   return this.dalleService.findOne(id);
-  // }
-
-  @Get(':prompt')
+  @Get('createImage/:prompt')
   getOpenAI(@Param('prompt') question: string) {
     return this.dalleService.getOpenAI(question);
   }
 
-  @Get('findFollowingImages/:userId')
+  @Get('findPersonalImages/:userId')
   findFromUserId(@Param('userId') userId: string) {
     return this.dalleService.findFromUserId(userId);
   }
@@ -41,6 +36,11 @@ export class DalleController {
   @Get('findFollowingWithArray/:userIds')
   findFromUserIds(@Param('userIds') userIds: string) {
     return this.dalleService.findFromUserIds(userIds);
+  }
+
+  @Get('downloadImage/:imageUrl')
+  download(@Param('imageUrl') imageUrl: string) {
+      return this.dalleService.download(imageUrl);
   }
 
   @Post()

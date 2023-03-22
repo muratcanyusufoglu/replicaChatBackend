@@ -30,6 +30,19 @@ export class MessageService {
     return message;
   }
 
+  async findPersonalChat(userId: string) {
+    const messages = await this.messageModel
+      .find({
+        user: userId, // where userId is your column name
+      })
+      .exec();
+    if (!messages) {
+      //throw new HttpException(`message #${userId} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`message #${userId} not found`);
+    }
+    return messages;
+  }
+
   async getOpenAI(question: string): Promise<any> {
     const key = process.env.GPT_API_KEY;
     const configuration = new Configuration({

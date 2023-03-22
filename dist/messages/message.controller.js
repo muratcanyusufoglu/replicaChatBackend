@@ -26,6 +26,9 @@ let MessageController = class MessageController {
     getOpenAI(question) {
         return this.messageService.getOpenAI(question);
     }
+    findPersonalChat(userId) {
+        return this.messageService.findPersonalChat(userId);
+    }
     create(createMessageDto) {
         console.log(createMessageDto instanceof create_message_dto_1.CreateMessageDto);
         return this.messageService.create(createMessageDto);
@@ -45,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MessageController.prototype, "getOpenAI", null);
+__decorate([
+    (0, common_1.Get)('getPersonalChat/:userId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], MessageController.prototype, "findPersonalChat", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

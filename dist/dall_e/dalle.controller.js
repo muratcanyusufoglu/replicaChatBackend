@@ -33,6 +33,9 @@ let DalleController = class DalleController {
     findFromUserIds(userIds) {
         return this.dalleService.findFromUserIds(userIds);
     }
+    download(imageUrl) {
+        return this.dalleService.download(imageUrl);
+    }
     create(createDalleDto) {
         console.log(createDalleDto instanceof create_dalle_dto_1.CreateDalleDto);
         return this.dalleService.create(createDalleDto);
@@ -49,14 +52,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':prompt'),
+    (0, common_1.Get)('createImage/:prompt'),
     __param(0, (0, common_1.Param)('prompt')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "getOpenAI", null);
 __decorate([
-    (0, common_1.Get)('findFollowingImages/:userId'),
+    (0, common_1.Get)('findPersonalImages/:userId'),
     __param(0, (0, common_1.Param)('userId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -69,6 +72,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "findFromUserIds", null);
+__decorate([
+    (0, common_1.Get)('downloadImage/:imageUrl'),
+    __param(0, (0, common_1.Param)('imageUrl')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], DalleController.prototype, "download", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
