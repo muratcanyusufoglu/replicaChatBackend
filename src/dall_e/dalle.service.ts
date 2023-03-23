@@ -98,9 +98,12 @@ var downloadItem = function(uri, filename, callback){
     request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
   });
 };
-
-await downloadItem('https://www.google.com/images/srpr/logo3w.png', 'C:/Users/Administrator/Pictures/image.png', function(){
-  console.log('done');
+const myArray = imageUrl.split('https://oaidalleapiprodscus.blob.core.windows.net/private/')
+const myArray2 = myArray[1].split('/')
+const myArray3 = myArray2[2].split('?')
+await downloadItem(imageUrl, `C:/inetpub/wwwroot/photo/${myArray3[0]}`, function(){
+  console.log('done', myArray3[0]);
+  return myArray3[0];
 });
 //await request.get({url: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png', encoding: 'binary'}, function (err, response, body) {
   //fs.createWriteStream("C:\Users\Administrator\Pictures", body, {encoding: 'binary'}, function(err) {
@@ -137,14 +140,20 @@ await downloadItem('https://www.google.com/images/srpr/logo3w.png', 'C:/Users/Ad
         },
       );
       const image = response.data.data[0].url;
-
-
+      const myArray = image.split('https://oaidalleapiprodscus.blob.core.windows.net/private/')
+      const myArray2 = myArray[1].split('/')
+      const myArray3 = myArray2[2].split('?')
       console.log('data',image, response);
       if(image) {
+        const pngAdress = await this.download(image)
+        console.log('pngAdress', pngAdress);
+        const imageAdress=`http://37.148.213.28/photo/${myArray3[0]}`
+        return imageAdress;
       }
-      return image;
+
     } catch (error) {
       console.log('ERROR getopenai answer', error);
+      return error;
     }
   }
 

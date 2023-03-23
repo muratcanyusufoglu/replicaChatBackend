@@ -69,8 +69,12 @@ let DalleService = class DalleService {
                 request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
             });
         };
-        await downloadItem('https://www.google.com/images/srpr/logo3w.png', 'C:/Users/Administrator/Pictures/image.png', function () {
-            console.log('done');
+        const myArray = imageUrl.split('https://oaidalleapiprodscus.blob.core.windows.net/private/');
+        const myArray2 = myArray[1].split('/');
+        const myArray3 = myArray2[2].split('?');
+        await downloadItem(imageUrl, `C:/inetpub/wwwroot/photo/${myArray3[0]}`, function () {
+            console.log('done', myArray3[0]);
+            return myArray3[0];
         });
     }
     async getOpenAI(prompt) {
@@ -91,13 +95,20 @@ let DalleService = class DalleService {
                 },
             });
             const image = response.data.data[0].url;
+            const myArray = image.split('https://oaidalleapiprodscus.blob.core.windows.net/private/');
+            const myArray2 = myArray[1].split('/');
+            const myArray3 = myArray2[2].split('?');
             console.log('data', image, response);
             if (image) {
+                const pngAdress = await this.download(image);
+                console.log('pngAdress', pngAdress);
+                const imageAdress = `http://37.148.213.28/photo/${myArray3[0]}`;
+                return imageAdress;
             }
-            return image;
         }
         catch (error) {
             console.log('ERROR getopenai answer', error);
+            return error;
         }
     }
     async update(id, updateDalleDto) {
