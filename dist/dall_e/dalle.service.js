@@ -47,13 +47,17 @@ let DalleService = class DalleService {
         }
         return message;
     }
-    async findFromUserIds(userIds) {
+    async findFromUserIds(userIds, paginationQuery) {
         console.log('userIdsss', userIds);
+        const { limit, offset } = paginationQuery;
         let userss = userIds.split(',');
         const message = await this.dalleModel
             .find({
             userId: { $in: userss },
         })
+            .sort({ _id: -1 })
+            .skip(offset)
+            .limit(limit)
             .exec();
         if (!message) {
             throw new common_1.NotFoundException(`message #${message} not found`);

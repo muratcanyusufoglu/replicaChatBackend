@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { DalleService } from './dalle.service';
 import { CreateDalleDto } from './dto/create-dalle.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { UpdateDalleDto } from './dto/update-dalle.dto';
 //import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
@@ -34,8 +35,8 @@ export class DalleController {
   }
 
   @Get('findFollowingWithArray/:userIds')
-  findFromUserIds(@Param('userIds') userIds: string) {
-    return this.dalleService.findFromUserIds(userIds);
+  findFromUserIds(@Param('userIds') userIds: string, @Query() paginationQuery: PaginationQueryDto) {
+    return this.dalleService.findFromUserIds(userIds, paginationQuery);
   }
 
   @Get('downloadImage/:imageUrl')

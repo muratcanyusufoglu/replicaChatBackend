@@ -2,6 +2,7 @@ import { Model } from 'mongoose';
 import { CreateDalleDto } from './dto/create-dalle.dto';
 import { Dalle } from './entities/dalle.entity';
 import { UpdateDalleDto } from './dto/update-dalle.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 export declare class DalleService {
     private readonly dalleModel;
     httpService: any;
@@ -15,7 +16,7 @@ export declare class DalleService {
     findFromUserId(userId: string): Promise<(Dalle & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
-    findFromUserIds(userIds: string): Promise<(Dalle & {
+    findFromUserIds(userIds: string, paginationQuery: PaginationQueryDto): Promise<(Dalle & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     download(imageUrl: string): Promise<void>;

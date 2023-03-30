@@ -9,6 +9,7 @@ import { UpdateDalleDto } from './dto/update-dalle.dto';
 import { UserSchema } from 'src/user/entities/user.entity';
 import { createWriteStream } from 'fs';
 import { AxiosResponse } from 'axios';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 
 @Injectable()
 export class DalleService {
@@ -48,8 +49,9 @@ export class DalleService {
     return message;
   }
 
-  async findFromUserIds(userIds: string) {
+  async findFromUserIds(userIds: string, paginationQuery: PaginationQueryDto) {
     console.log('userIdsss', userIds)
+    const {limit,offset} = paginationQuery;
     //const dalleLast = [];
     //userIds.map(item => dalleLast.push(this.findFromUserId(item)));
      // console.log('userIds', userIds.join(''));
@@ -62,6 +64,9 @@ export class DalleService {
       .find({
         userId: {$in:userss}, // where id is your column name
       })
+      .sort({ _id: -1 })
+      .skip(offset)
+      .limit(limit)
       .exec();
     if (!message) {
       //throw new HttpException(`message #${id} not found`, HttpStatus.NOT_FOUND);

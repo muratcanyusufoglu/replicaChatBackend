@@ -16,6 +16,7 @@ exports.DalleController = void 0;
 const common_1 = require("@nestjs/common");
 const dalle_service_1 = require("./dalle.service");
 const create_dalle_dto_1 = require("./dto/create-dalle.dto");
+const pagination_query_dto_1 = require("./dto/pagination-query.dto");
 const update_dalle_dto_1 = require("./dto/update-dalle.dto");
 let DalleController = class DalleController {
     constructor(dalleService) {
@@ -30,8 +31,8 @@ let DalleController = class DalleController {
     findFromUserId(userId) {
         return this.dalleService.findFromUserId(userId);
     }
-    findFromUserIds(userIds) {
-        return this.dalleService.findFromUserIds(userIds);
+    findFromUserIds(userIds, paginationQuery) {
+        return this.dalleService.findFromUserIds(userIds, paginationQuery);
     }
     download(imageUrl) {
         return this.dalleService.download(imageUrl);
@@ -68,8 +69,9 @@ __decorate([
 __decorate([
     (0, common_1.Get)('findFollowingWithArray/:userIds'),
     __param(0, (0, common_1.Param)('userIds')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, pagination_query_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", void 0)
 ], DalleController.prototype, "findFromUserIds", null);
 __decorate([
