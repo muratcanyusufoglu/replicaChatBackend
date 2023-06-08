@@ -12,7 +12,7 @@ import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 //import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
-@Controller('messages')
+@Controller('messagesWhom')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
@@ -20,21 +20,22 @@ export class MessageController {
   findAll(@Query() paginationQuery) {
     return this.messageService.findAll();
   }
-
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   console.log(typeof id);
   //   return this.messageService.findOne(id);
   // }
-
   @Get('gpt/:whom/:question')
   getOpenAI(@Param('whom') whom: string, @Param('question') question: string) {
     return this.messageService.getOpenAI(whom, question);
   }
 
-  @Get('getPersonalChat/:userId')
-  findPersonalChat(@Param('userId') userId: string) {
-    return this.messageService.findPersonalChat(userId);
+  @Get('getPersonalChat/:userId/:whom')
+  findPersonalChat(
+    @Param('userId') userId: string,
+    @Param('whom') whom: string,
+  ) {
+    return this.messageService.findPersonalChat(userId, whom);
   }
 
   @Post()

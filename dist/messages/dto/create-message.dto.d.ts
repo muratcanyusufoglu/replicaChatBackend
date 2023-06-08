@@ -1,11 +1,7 @@
-declare class MessageInfoDto {
-    readonly message: string;
+export declare class CreateMessageDto {
     readonly user: string;
+    readonly whom: string;
+    readonly message: string;
     readonly response: string;
     readonly date: string;
 }
-export declare class CreateMessageDto {
-    readonly user: string;
-    readonly messageInfo: MessageInfoDto;
-}
-export {};

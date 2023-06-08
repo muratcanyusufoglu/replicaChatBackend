@@ -36,10 +36,11 @@ let MessageService = class MessageService {
         }
         return message;
     }
-    async findPersonalChat(userId) {
+    async findPersonalChat(userId, whom) {
         const messages = await this.messageModel
             .find({
             user: userId,
+            whom: whom,
         })
             .exec();
         if (!messages) {

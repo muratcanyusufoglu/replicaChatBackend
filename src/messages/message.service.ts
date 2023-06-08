@@ -30,10 +30,11 @@ export class MessageService {
     return message;
   }
 
-  async findPersonalChat(userId: string) {
+  async findPersonalChat(userId: string, whom: string) {
     const messages = await this.messageModel
       .find({
-        user: userId, // where userId is your column name
+        user: userId,
+        whom: whom, // where userId is your column name
       })
       .exec();
     if (!messages) {

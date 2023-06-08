@@ -25,8 +25,15 @@ export class CreateMessageDto {
   @IsString()
   readonly user: string;
 
-  @IsOptional()
-  @Type(() => MessageInfoDto)
-  @ValidateNested()
-  readonly messageInfo: MessageInfoDto;
+  @IsString()
+  readonly whom: string;
+
+  @IsString()
+  readonly message: string;
+
+  @IsString()
+  readonly response: string;
+
+  @IsString()
+  readonly date: string;
 }

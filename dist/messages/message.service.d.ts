@@ -10,7 +10,7 @@ export declare class MessageService {
     findOne(id: string): Promise<Messages & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    findPersonalChat(userId: string): Promise<(Messages & {
+    findPersonalChat(userId: string, whom: string): Promise<(Messages & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     getOpenAI(whom: string, question: string): Promise<any>;

@@ -21,8 +21,17 @@ export class Messages extends Document {
   @Prop()
   user: string;
 
-  @Prop({type: MessageData})
-  messageInfo: MessageData
-} 
+  @Prop()
+  whom: string;
+
+  @Prop()
+  message: string;
+
+  @Prop()
+  response: string;
+
+  @Prop()
+  date: string;
+}
 
 export const MessageSchema = SchemaFactory.createForClass(Messages);

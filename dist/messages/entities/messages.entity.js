@@ -40,9 +40,21 @@ __decorate([
     __metadata("design:type", String)
 ], Messages.prototype, "user", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: MessageData }),
-    __metadata("design:type", MessageData)
-], Messages.prototype, "messageInfo", void 0);
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Messages.prototype, "whom", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Messages.prototype, "message", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Messages.prototype, "response", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Messages.prototype, "date", void 0);
 Messages = __decorate([
     (0, mongoose_1.Schema)()
 ], Messages);

@@ -11,9 +11,7 @@ const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const app_controller_1 = require("./app.controller");
 const message_module_1 = require("./messages/message.module");
-const dalle_module_1 = require("./dall_e/dalle.module");
 const mongoose_1 = require("@nestjs/mongoose");
-const followers_module_1 = require("./followers/followers.module");
 const user_module_1 = require("./user/user.module");
 const message_module_2 = require("./lastMessages/message.module");
 const key = process.env.MONGODB_API_KEY;
@@ -23,8 +21,6 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             message_module_1.MessageModule,
-            dalle_module_1.DalleModule,
-            followers_module_1.FollowModule,
             user_module_1.UserModule,
             message_module_2.LastMessageModule,
             mongoose_1.MongooseModule.forRoot(key),
