@@ -15,6 +15,7 @@ const dalle_module_1 = require("./dall_e/dalle.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const followers_module_1 = require("./followers/followers.module");
 const user_module_1 = require("./user/user.module");
+const message_module_2 = require("./lastMessages/message.module");
 const key = process.env.MONGODB_API_KEY;
 let AppModule = class AppModule {
 };
@@ -25,7 +26,8 @@ AppModule = __decorate([
             dalle_module_1.DalleModule,
             followers_module_1.FollowModule,
             user_module_1.UserModule,
-            mongoose_1.MongooseModule.forRoot(key)
+            message_module_2.LastMessageModule,
+            mongoose_1.MongooseModule.forRoot(key),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -1,7 +1,6 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-
 @Schema()
 export class Follow extends Document {
   @Prop()

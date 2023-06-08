@@ -19,8 +19,7 @@ export class FollowService {
   }
 
   async findOne(id: string) {
-
-    const userIds =[];
+    const userIds = [];
     const followerInfo = await this.followModule
       .find({
         followerId: id, // where id is your column name
@@ -31,7 +30,11 @@ export class FollowService {
       throw new NotFoundException(`followerInfo #${id} not found`);
     }
 
-    userIds.push(followerInfo.map(user => {return user.followingId}))//followerInfo.map(user => user.followingId);
+    userIds.push(
+      followerInfo.map((user) => {
+        return user.followingId;
+      }),
+    ); //followerInfo.map(user => user.followingId);
     return userIds;
   }
 
@@ -52,7 +55,7 @@ export class FollowService {
     const followerInfo = await this.followModule
       .findOne({
         followingId: followId,
-        followerId: followerId // where id is your column name
+        followerId: followerId, // where id is your column name
       })
       .exec();
     if (!followerInfo) {
@@ -62,35 +65,45 @@ export class FollowService {
     return followerInfo;
   }
 
-  async update(id:string, updateFollowersDto: UpdateFollowersDto){
+  async update(id: string, updateFollowersDto: UpdateFollowersDto) {
     const existingFollow = await this.followModule
-    .findOneAndUpdate({_id: id},  {$set: updateFollowersDto}, {new:true})
-    .exec();
+      .findOneAndUpdate(
+        { _id: id },
+        { $set: updateFollowersDto },
+        { new: true },
+      )
+      .exec();
 
-    if(!existingFollow){
-      throw new NotFoundException(`Image ${id} not found`)
+    if (!existingFollow) {
+      throw new NotFoundException(`Image ${id} not found`);
     }
     return existingFollow;
   }
 
-  async addFollowingId(followerId:string, updateFollowersDto: UpdateFollowersDto){
+  async addFollowingId(
+    followerId: string,
+    updateFollowersDto: UpdateFollowersDto,
+  ) {
     const existingFollow = await this.followModule
-    .findOneAndUpdate({followerId: followerId},  {$set: updateFollowersDto}, {new:true})
-    .exec();
+      .findOneAndUpdate(
+        { followerId: followerId },
+        { $set: updateFollowersDto },
+        { new: true },
+      )
+      .exec();
 
-    if(!existingFollow){
-      throw new NotFoundException(`Image ${followerId} not found`)
+    if (!existingFollow) {
+      throw new NotFoundException(`Image ${followerId} not found`);
     }
     return existingFollow;
   }
-
 
   create(createFollowDto: CreateFollowDto) {
     const image = new this.followModule(createFollowDto);
     return image.save();
   }
 
-  async remove(followId: string,followerId: string) {
+  async remove(followId: string, followerId: string) {
     const coffee = await this.findOneIdes(followId, followerId);
     return this.followModule.remove(coffee);
   }

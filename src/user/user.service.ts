@@ -5,7 +5,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
-
 @Injectable()
 export class UserService {
   constructor(
@@ -30,18 +29,20 @@ export class UserService {
     return user;
   }
 
-  async update(userId:string, updateUserDto: UpdateUserDto){
+  async update(userId: string, updateUserDto: UpdateUserDto) {
     const existingDalle = await this.userModule
-    .findOneAndUpdate({ userId: userId},  {$set: updateUserDto}, {new:true})
-    .exec();
+      .findOneAndUpdate(
+        { userId: userId },
+        { $set: updateUserDto },
+        { new: true },
+      )
+      .exec();
 
-    if(!existingDalle){
-      throw new NotFoundException(`Image ${userId} not found`)
+    if (!existingDalle) {
+      throw new NotFoundException(`Image ${userId} not found`);
     }
     return existingDalle;
-  
-}
-
+  }
 
   create(createUserDto: CreateUserDto) {
     const image = new this.userModule(createUserDto);

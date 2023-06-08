@@ -43,7 +43,7 @@ export class MessageService {
     return messages;
   }
 
-  async getOpenAI(question: string): Promise<any> {
+  async getOpenAI(whom: string, question: string): Promise<any> {
     const key = process.env.GPT_API_KEY;
     const configuration = new Configuration({
       apiKey: key,
@@ -53,8 +53,15 @@ export class MessageService {
 
       const completion = await openai.createChatCompletion(
         {
-          model: "gpt-3.5-turbo",
-          messages: [{role: "user", content: question}],
+          model: 'gpt-3.5-turbo',
+          messages: [
+            {
+              role: 'system',
+              content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective.`,
+            },
+            { role: 'user', content: question },
+          ],
+
           //prompt: question,
           //max_tokens: 500,
         },
@@ -65,9 +72,9 @@ export class MessageService {
           },
         },
       );
-      const data =completion.data.choices[0].message;
-      console.log('dataa',data, completion);
-      if(data) {
+      const data = completion.data.choices[0].message;
+      console.log('dataa', data, completion);
+      if (data) {
       }
       return data;
     } catch (error) {
@@ -79,5 +86,4 @@ export class MessageService {
     const message = new this.messageModel(createMessageDto);
     return message.save();
   }
-  
 }

@@ -4,7 +4,6 @@ import { AppModule } from './app.module';
 import { Configuration, OpenAIApi } from 'openai';
 
 async function bootstrap() {
-
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
     new ValidationPipe({
@@ -12,8 +11,8 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transformOptions: {
         enableImplicitConversion: true,
-      }
-}),
+      },
+    }),
   );
   await app.listen(3500);
 }

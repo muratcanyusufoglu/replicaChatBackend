@@ -34,7 +34,9 @@ let FollowService = class FollowService {
         if (!followerInfo) {
             throw new common_1.NotFoundException(`followerInfo #${id} not found`);
         }
-        userIds.push(followerInfo.map(user => { return user.followingId; }));
+        userIds.push(followerInfo.map((user) => {
+            return user.followingId;
+        }));
         return userIds;
     }
     async findOneAllInfo(id) {
@@ -52,7 +54,7 @@ let FollowService = class FollowService {
         const followerInfo = await this.followModule
             .findOne({
             followingId: followId,
-            followerId: followerId
+            followerId: followerId,
         })
             .exec();
         if (!followerInfo) {

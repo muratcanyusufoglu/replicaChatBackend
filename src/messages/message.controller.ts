@@ -27,9 +27,9 @@ export class MessageController {
   //   return this.messageService.findOne(id);
   // }
 
-  @Get(':question')
-  getOpenAI(@Param('question') question: string) {
-    return this.messageService.getOpenAI(question);
+  @Get('gpt/:whom/:question')
+  getOpenAI(@Param('whom') whom: string, @Param('question') question: string) {
+    return this.messageService.getOpenAI(whom, question);
   }
 
   @Get('getPersonalChat/:userId')
