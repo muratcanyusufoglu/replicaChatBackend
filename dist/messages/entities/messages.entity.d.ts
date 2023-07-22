@@ -23,11 +23,16 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Document } from 'mongoose';
-export declare class Messages extends Document {
-    user: string;
+declare class MessageArray extends Document {
     whom: string;
     message: string;
     response: string;
     date: string;
 }
+export declare class Messages extends Document {
+    user: string;
+    userPhoto: string;
+    messageArray: MessageArray[];
+}
 export declare const MessageSchema: import("mongoose").Schema<Messages, import("mongoose").Model<Messages, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Messages>;
+export {};

@@ -2,12 +2,12 @@ import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document, PromiseProvider } from 'mongoose';
 
 @Schema()
-class MessageData extends Document {
+class MessageArray extends Document {
   @Prop()
-  message: string;
+  whom: string;
 
   @Prop()
-  user: string;
+  message: string;
 
   @Prop()
   response: string;
@@ -22,16 +22,10 @@ export class Messages extends Document {
   user: string;
 
   @Prop()
-  whom: string;
+  userPhoto: string;
 
   @Prop()
-  message: string;
-
-  @Prop()
-  response: string;
-
-  @Prop()
-  date: string;
+  messageArray: MessageArray[];
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Messages);

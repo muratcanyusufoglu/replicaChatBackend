@@ -1,18 +1,9 @@
 import { Type } from 'class-transformer';
-import {
-  IsDate,
-  IsObject,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { IsArray, IsString, ValidateNested } from 'class-validator';
 
-class MessageInfoDto {
+class MessageArray {
   @IsString()
   readonly message: string;
-
-  @IsString()
-  readonly user: string;
 
   @IsString()
   readonly response: string;
@@ -23,17 +14,16 @@ class MessageInfoDto {
 
 export class CreateMessageDto {
   @IsString()
-  readonly user: string;
+  readonly userId: string;
+
+  @IsString()
+  readonly userPhoto: string;
 
   @IsString()
   readonly whom: string;
 
-  @IsString()
-  readonly message: string;
-
-  @IsString()
-  readonly response: string;
-
-  @IsString()
-  readonly date: string;
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => MessageArray)
+  readonly messageArray: MessageArray[];
 }

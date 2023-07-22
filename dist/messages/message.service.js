@@ -82,6 +82,7 @@ let MessageService = class MessageService {
     }
     create(createMessageDto) {
         const message = new this.messageModel(createMessageDto);
+        const findingMesage = this.findPersonalChat(message.user, message.userPhoto);
         return message.save();
     }
 };

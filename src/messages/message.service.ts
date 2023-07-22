@@ -83,8 +83,18 @@ export class MessageService {
     }
   }
 
+  // create(createMessageDto: CreateMessageDto) {
+  //   const message = new this.messageModel(createMessageDto);
+  //   const findingMesage = this.findPersonalChat(
+  //     message.user,
+  //     message.userPhoto,
+  //   );
+
+  //   return message.save();
+  // }
+
   create(createMessageDto: CreateMessageDto) {
     const message = new this.messageModel(createMessageDto);
-    return message.save();
+    const finding = this.findPersonalChat(message.user, message.whom);
   }
 }

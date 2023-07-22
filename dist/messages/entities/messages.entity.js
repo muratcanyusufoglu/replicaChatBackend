@@ -12,27 +12,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessageSchema = exports.Messages = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-let MessageData = class MessageData extends mongoose_2.Document {
+let MessageArray = class MessageArray extends mongoose_2.Document {
 };
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], MessageData.prototype, "message", void 0);
+], MessageArray.prototype, "whom", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], MessageData.prototype, "user", void 0);
+], MessageArray.prototype, "message", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], MessageData.prototype, "response", void 0);
+], MessageArray.prototype, "response", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], MessageData.prototype, "date", void 0);
-MessageData = __decorate([
+], MessageArray.prototype, "date", void 0);
+MessageArray = __decorate([
     (0, mongoose_1.Schema)()
-], MessageData);
+], MessageArray);
 let Messages = class Messages extends mongoose_2.Document {
 };
 __decorate([
@@ -42,19 +42,11 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], Messages.prototype, "whom", void 0);
+], Messages.prototype, "userPhoto", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], Messages.prototype, "message", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], Messages.prototype, "response", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], Messages.prototype, "date", void 0);
+    __metadata("design:type", Array)
+], Messages.prototype, "messageArray", void 0);
 Messages = __decorate([
     (0, mongoose_1.Schema)()
 ], Messages);
