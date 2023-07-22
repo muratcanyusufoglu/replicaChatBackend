@@ -63,12 +63,10 @@ let MessageService = class MessageService {
         })
             .exec();
         if (messages == null) {
-            console.log('messageDTOO', messages);
             const message = new this.messageModel(createMessageDto);
             return message.save();
         }
         else {
-            console.log('messageDTOOElsee', messages);
             this.update(createMessageDto.user, createMessageDto.whom, createMessageDto);
         }
     }

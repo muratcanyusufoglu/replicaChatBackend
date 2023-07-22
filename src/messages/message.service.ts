@@ -93,8 +93,22 @@ export class MessageService {
   //   return message.save();
   // }
 
-  create(createMessageDto: CreateMessageDto) {
+  async create(createMessageDto: CreateMessageDto) {
     const message = new this.messageModel(createMessageDto);
-    const finding = this.findPersonalChat(message.user, message.whom);
+    const findingMessage = this.findPersonalChat(message.userId, message.whom);
+    if (findingMessage != null) {
+      const mess = await this.messageModel.findOneAndUpdate(
+        {
+          userId: message.userId,
+          whom: message.whom,
+        },
+        { $push: { [`messageArray`]: message.messageArray[0] } },
+        { new: true },
+      );
+      mess.save();
+      return mess;
+    }
+    message.save();
+    return message;
   }
 }

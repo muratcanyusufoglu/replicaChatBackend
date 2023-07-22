@@ -19,7 +19,10 @@ class MessageArray extends Document {
 @Schema()
 export class Messages extends Document {
   @Prop()
-  user: string;
+  userId: string;
+
+  @Prop()
+  whom: string;
 
   @Prop()
   userPhoto: string;

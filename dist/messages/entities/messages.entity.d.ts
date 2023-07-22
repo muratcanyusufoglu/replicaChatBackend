@@ -30,7 +30,8 @@ declare class MessageArray extends Document {
     date: string;
 }
 export declare class Messages extends Document {
-    user: string;
+    userId: string;
+    whom: string;
     userPhoto: string;
     messageArray: MessageArray[];
 }

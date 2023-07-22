@@ -80,10 +80,19 @@ let MessageService = class MessageService {
             console.log('ERRORR', error);
         }
     }
-    create(createMessageDto) {
+    async create(createMessageDto) {
         const message = new this.messageModel(createMessageDto);
-        const findingMesage = this.findPersonalChat(message.user, message.userPhoto);
-        return message.save();
+        const findingMessage = this.findPersonalChat(message.userId, message.whom);
+        if (findingMessage != null) {
+            const mess = await this.messageModel.findOneAndUpdate({
+                userId: message.userId,
+                whom: message.whom,
+            }, { $push: { [`messageArray`]: message.messageArray[0] } }, { new: true });
+            mess.save();
+            return mess;
+        }
+        message.save();
+        return message;
     }
 };
 MessageService = __decorate([
