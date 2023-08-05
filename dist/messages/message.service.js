@@ -82,8 +82,9 @@ let MessageService = class MessageService {
     }
     async create(createMessageDto) {
         const message = new this.messageModel(createMessageDto);
-        const findingMessage = this.findPersonalChat(message.userId, message.whom);
-        if (findingMessage != null) {
+        const findingMessage = await this.findPersonalChat(message.userId, message.whom);
+        console.log(findingMessage);
+        if (findingMessage.length != 0) {
             const mess = await this.messageModel.findOneAndUpdate({
                 userId: message.userId,
                 whom: message.whom,

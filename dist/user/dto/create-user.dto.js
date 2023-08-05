@@ -26,16 +26,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "userPhoto", void 0);
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "gptToken", void 0);
+], CreateUserDto.prototype, "packageName", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "dalleToken", void 0);
+], CreateUserDto.prototype, "messageCoin", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "freeToken", void 0);
+], CreateUserDto.prototype, "freeCoin", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "finishDate", void 0);
 exports.CreateUserDto = CreateUserDto;
 //# sourceMappingURL=create-user.dto.js.map

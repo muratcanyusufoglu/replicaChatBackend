@@ -27,8 +27,9 @@ export declare class User extends Document {
     user: string;
     userId: string;
     userPhoto: string;
-    gptToken: number;
-    dalleToken: number;
-    freeToken: number;
+    packageName: string;
+    finishDate: string;
+    messageCoin: number;
+    freeCoin: number;
 }
 export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User>;

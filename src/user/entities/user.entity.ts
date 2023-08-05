@@ -14,13 +14,16 @@ export class User extends Document {
   userPhoto: string;
 
   @Prop()
-  gptToken: number;
+  packageName:string;
 
   @Prop()
-  dalleToken: number;
+  finishDate:string;
 
   @Prop()
-  freeToken: number;
+  messageCoin: number;
+
+  @Prop()
+  freeCoin: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

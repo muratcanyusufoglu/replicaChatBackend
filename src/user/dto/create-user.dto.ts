@@ -10,12 +10,16 @@ export class CreateUserDto {
   @IsString()
   readonly userPhoto: string;
 
-  @IsNumber()
-  readonly gptToken: string;
+  @IsString()
+  readonly packageName:string;
 
   @IsNumber()
-  readonly dalleToken: string;
+  readonly messageCoin: string;
 
   @IsNumber()
-  readonly freeToken: string;
+  readonly freeCoin: string;
+
+  @IsString()
+  readonly finishDate:string;
+
 }

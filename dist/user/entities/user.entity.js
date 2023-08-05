@@ -28,16 +28,20 @@ __decorate([
 ], User.prototype, "userPhoto", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", Number)
-], User.prototype, "gptToken", void 0);
+    __metadata("design:type", String)
+], User.prototype, "packageName", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], User.prototype, "finishDate", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
-], User.prototype, "dalleToken", void 0);
+], User.prototype, "messageCoin", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
-], User.prototype, "freeToken", void 0);
+], User.prototype, "freeCoin", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);
