@@ -14,12 +14,15 @@ export class CreateUserDto {
   readonly packageName:string;
 
   @IsNumber()
-  readonly messageCoin: string;
+  readonly messageCoin: number;
 
   @IsNumber()
-  readonly freeCoin: string;
+  readonly freeCoin: number;
 
   @IsString()
   readonly finishDate:string;
+
+  @IsString()
+  readonly lastLogin:string;
 
 }

@@ -14,6 +14,7 @@ const message_module_1 = require("./messages/message.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./user/user.module");
 const message_module_2 = require("./lastMessages/message.module");
+const firebase_module_1 = require("./firebase/firebase.module");
 const key = process.env.MONGODB_API_KEY;
 let AppModule = class AppModule {
 };
@@ -23,6 +24,7 @@ AppModule = __decorate([
             message_module_1.MessageModule,
             user_module_1.UserModule,
             message_module_2.LastMessageModule,
+            firebase_module_1.FirebaseModule,
             mongoose_1.MongooseModule.forRoot(key),
         ],
         controllers: [app_controller_1.AppController],

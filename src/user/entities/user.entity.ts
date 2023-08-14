@@ -24,6 +24,10 @@ export class User extends Document {
 
   @Prop()
   freeCoin: number;
+
+  @Prop()
+  lastLogin: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

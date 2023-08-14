@@ -3,7 +3,8 @@ export declare class CreateUserDto {
     readonly userId: string;
     readonly userPhoto: string;
     readonly packageName: string;
-    readonly messageCoin: string;
-    readonly freeCoin: string;
+    readonly messageCoin: number;
+    readonly freeCoin: number;
     readonly finishDate: string;
+    readonly lastLogin: string;
 }
