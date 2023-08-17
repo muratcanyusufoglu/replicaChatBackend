@@ -20,14 +20,17 @@ export class MessageController {
   findAll(@Query() paginationQuery) {
     return this.messageService.findAll();
   }
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   console.log(typeof id);
-  //   return this.messageService.findOne(id);
-  // }
+
   @Get('gpt/:whom/:question')
-  getOpenAI(@Param('whom') whom: string, @Param('question') question: string) {
-    return this.messageService.getOpenAI(whom, question);
+  getOpenAIAnswer(@Param('whom') whom: string, @Param('question') question: string) {
+    return this.messageService.getOpenAIAnswer(whom, question);
+  }
+
+  @Get('gptNotification/:whom/:question')
+  getOpenAIForNotification(
+  @Param('whom') whom: string,@Param('userId') userId: string,
+   @Param('userPhoto') userPhoto: string, @Param('date') date: string, @Param('response') response: string) {
+    return this.messageService.getOpenAIForNotification(whom,userId,userPhoto,date,response);
   }
 
   @Get('getPersonalChat/:userId/:whom')

@@ -21,20 +21,12 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
-/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import { LastMessageService } from './message.service';
-import { CreateLastMessageDto } from './dto/create-message.dto';
-export declare class LastMessageController {
-    private readonly messageService;
-    constructor(messageService: LastMessageService);
-    findAll(paginationQuery: any): Promise<(import("./entities/lastmessages.entity").LastMessages & {
-        _id: import("mongoose").Types.ObjectId;
-    })[]>;
-    findPersonalChat(userId: string): Promise<(import("./entities/lastmessages.entity").LastMessages & {
-        _id: import("mongoose").Types.ObjectId;
-    })[]>;
-    create(createMessageDto: CreateLastMessageDto): Promise<import("./entities/lastmessages.entity").LastMessages & {
-        _id: import("mongoose").Types.ObjectId;
-    }>;
+import { Document } from 'mongoose';
+export declare class LastMessages extends Document {
+    whom: string;
+    user: string;
+    response: string;
+    date: string;
 }
+export declare const LastMessageSchema: import("mongoose").Schema<LastMessages, import("mongoose").Model<LastMessages, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, LastMessages>;

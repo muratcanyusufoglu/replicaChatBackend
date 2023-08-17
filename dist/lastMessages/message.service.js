@@ -12,12 +12,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageService = void 0;
+exports.LastMessageService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const messages_entity_1 = require("./entities/messages.entity");
-let MessageService = class MessageService {
+const lastmessages_entity_1 = require("./entities/lastmessages.entity");
+let LastMessageService = class LastMessageService {
     constructor(messageModel) {
         this.messageModel = messageModel;
     }
@@ -71,10 +71,10 @@ let MessageService = class MessageService {
         }
     }
 };
-MessageService = __decorate([
+LastMessageService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(messages_entity_1.LastMessages.name)),
+    __param(0, (0, mongoose_1.InjectModel)(lastmessages_entity_1.LastMessages.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
-], MessageService);
-exports.MessageService = MessageService;
+], LastMessageService);
+exports.LastMessageService = LastMessageService;
 //# sourceMappingURL=message.service.js.map

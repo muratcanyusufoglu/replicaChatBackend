@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateMessageDto } from './dto/create-message.dto';
-import { LastMessages } from './entities/messages.entity';
+import { CreateLastMessageDto } from './dto/create-message.dto';
+import { LastMessages } from './entities/lastmessages.entity';
 
 import { Configuration, OpenAIApi } from 'openai';
 
 @Injectable()
-export class MessageService {
+export class LastMessageService {
   constructor(
     @InjectModel(LastMessages.name)
     private readonly messageModel: Model<LastMessages>,
@@ -46,7 +46,7 @@ export class MessageService {
   async update(
     userId: string,
     whom: string,
-    updateMessageDto: CreateMessageDto,
+    updateMessageDto: CreateLastMessageDto,
   ) {
     const existingMessage = await this.messageModel
       .findOneAndUpdate(
@@ -62,7 +62,7 @@ export class MessageService {
     return existingMessage;
   }
 
-  async create(createMessageDto: CreateMessageDto) {
+  async create(createMessageDto: CreateLastMessageDto) {
     const messages = await this.messageModel
       .findOne({
         user: createMessageDto.user,

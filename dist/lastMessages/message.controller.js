@@ -12,11 +12,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageController = void 0;
+exports.LastMessageController = void 0;
 const common_1 = require("@nestjs/common");
 const message_service_1 = require("./message.service");
 const create_message_dto_1 = require("./dto/create-message.dto");
-let MessageController = class MessageController {
+let LastMessageController = class LastMessageController {
     constructor(messageService) {
         this.messageService = messageService;
     }
@@ -27,7 +27,7 @@ let MessageController = class MessageController {
         return this.messageService.findPersonalChat(userId);
     }
     create(createMessageDto) {
-        console.log(createMessageDto instanceof create_message_dto_1.CreateMessageDto);
+        console.log(createMessageDto instanceof create_message_dto_1.CreateLastMessageDto);
         return this.messageService.create(createMessageDto);
     }
 };
@@ -37,24 +37,24 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], MessageController.prototype, "findAll", null);
+], LastMessageController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('/:userId'),
     __param(0, (0, common_1.Param)('userId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], MessageController.prototype, "findPersonalChat", null);
+], LastMessageController.prototype, "findPersonalChat", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_message_dto_1.CreateMessageDto]),
+    __metadata("design:paramtypes", [create_message_dto_1.CreateLastMessageDto]),
     __metadata("design:returntype", void 0)
-], MessageController.prototype, "create", null);
-MessageController = __decorate([
+], LastMessageController.prototype, "create", null);
+LastMessageController = __decorate([
     (0, common_1.Controller)('lastmessage'),
-    __metadata("design:paramtypes", [message_service_1.MessageService])
-], MessageController);
-exports.MessageController = MessageController;
+    __metadata("design:paramtypes", [message_service_1.LastMessageService])
+], LastMessageController);
+exports.LastMessageController = LastMessageController;
 //# sourceMappingURL=message.controller.js.map

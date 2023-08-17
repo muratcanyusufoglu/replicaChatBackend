@@ -23,8 +23,11 @@ let MessageController = class MessageController {
     findAll(paginationQuery) {
         return this.messageService.findAll();
     }
-    getOpenAI(whom, question) {
-        return this.messageService.getOpenAI(whom, question);
+    getOpenAIAnswer(whom, question) {
+        return this.messageService.getOpenAIAnswer(whom, question);
+    }
+    getOpenAIForNotification(whom, userId, userPhoto, date, response) {
+        return this.messageService.getOpenAIForNotification(whom, userId, userPhoto, date, response);
     }
     findPersonalChat(userId, whom) {
         return this.messageService.findPersonalChat(userId, whom);
@@ -48,7 +51,18 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
-], MessageController.prototype, "getOpenAI", null);
+], MessageController.prototype, "getOpenAIAnswer", null);
+__decorate([
+    (0, common_1.Get)('gptNotification/:whom/:question'),
+    __param(0, (0, common_1.Param)('whom')),
+    __param(1, (0, common_1.Param)('userId')),
+    __param(2, (0, common_1.Param)('userPhoto')),
+    __param(3, (0, common_1.Param)('date')),
+    __param(4, (0, common_1.Param)('response')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String, String]),
+    __metadata("design:returntype", void 0)
+], MessageController.prototype, "getOpenAIForNotification", null);
 __decorate([
     (0, common_1.Get)('getPersonalChat/:userId/:whom'),
     __param(0, (0, common_1.Param)('userId')),

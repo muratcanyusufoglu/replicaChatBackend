@@ -16,6 +16,10 @@ const scheduled_service_1 = require("./scheduled.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_entity_1 = require("../user/entities/user.entity");
 const user_service_1 = require("../user/user.service");
+const lastmessages_entity_1 = require("../lastMessages/entities/lastmessages.entity");
+const message_service_1 = require("../lastMessages/message.service");
+const messages_entity_1 = require("../messages/entities/messages.entity");
+const message_service_2 = require("../messages/message.service");
 let FirebaseModule = class FirebaseModule {
 };
 FirebaseModule = __decorate([
@@ -25,6 +29,18 @@ FirebaseModule = __decorate([
                 {
                     name: user_entity_1.User.name,
                     schema: user_entity_1.UserSchema,
+                },
+            ]),
+            mongoose_1.MongooseModule.forFeature([
+                {
+                    name: lastmessages_entity_1.LastMessages.name,
+                    schema: lastmessages_entity_1.LastMessageSchema,
+                },
+            ]),
+            mongoose_1.MongooseModule.forFeature([
+                {
+                    name: messages_entity_1.Messages.name,
+                    schema: messages_entity_1.MessageSchema,
                 },
             ]),
             config_1.ConfigModule.forRoot(),
@@ -38,7 +54,9 @@ FirebaseModule = __decorate([
             },
             firebase_service_1.NotificationService,
             scheduled_service_1.ScheduledNotificationService,
-            user_service_1.UserService
+            user_service_1.UserService,
+            message_service_1.LastMessageService,
+            message_service_2.MessageService
         ],
         exports: ['FirebaseAdmin'],
         controllers: [firebase_controller_1.NotificationController]

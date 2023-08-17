@@ -1,8 +1,8 @@
 import { CacheModule, Module } from '@nestjs/common';
-import { MessageController } from './message.controller';
-import { MessageService } from './message.service';
+import { LastMessageController } from './message.controller';
+import { LastMessageService } from './message.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LastMessages, MessageSchema } from './entities/messages.entity';
+import { LastMessages, LastMessageSchema } from './entities/lastmessages.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -10,12 +10,12 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forFeature([
       {
         name: LastMessages.name,
-        schema: MessageSchema,
+        schema: LastMessageSchema,
       },
     ]),
     ConfigModule.forRoot(),
   ],
-  controllers: [MessageController],
-  providers: [MessageService],
+  controllers: [LastMessageController],
+  providers: [LastMessageService],
 })
 export class LastMessageModule {}

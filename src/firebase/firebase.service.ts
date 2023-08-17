@@ -2,27 +2,34 @@ import { Injectable, Inject,OnModuleInit } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { UserService } from '../user/user.service'; // Replace with your user service
 import { ChatCompletionResponseMessageRoleEnum } from 'openai';
+import { LastMessageService } from 'src/lastMessages/message.service';
+import { MessageService } from 'src/messages/message.service';
 
 @Injectable()
 export class NotificationService {
-  constructor(@Inject('FirebaseAdmin') private readonly firebaseAdmin: admin.app.App, private readonly userService: UserService
+  constructor(@Inject('FirebaseAdmin') private readonly firebaseAdmin: admin.app.App, 
+  private readonly userService: UserService,
+  private readonly lastMessageService: LastMessageService,
+  private readonly messageService: MessageService,
+
   ) {}
 
 
   async sendScheduledNotifications() {
+  
     const users = await this.userService.findAll(); // Fetch all users from your user service
   const currentTime = Date.now().toString();
   const twoHoursInMillis = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
 
   for (const user of users) {
-    console.log(user.lastLogin, ' ', currentTime, ' ', twoHoursInMillis);
-   const lastLogin = user.lastLogin; // Retrieve the last login timestamp from the user object
-
-     if(parseInt(currentTime) - parseInt(lastLogin) >= twoHoursInMillis) {
-      console.log(user.notificationToken);
-     const notificationPayload: admin.messaging.NotificationMessagePayload = {
-          title: 'Reminder',
-          body: 'You have been logged out. Log in again to continue.',
+    const lastLogin = user.lastLogin; // Retrieve the last login timestamp from the user object
+    const lastMessage = await this.lastMessageService.findPersonalChat(user.userId).then((resp)=>{return resp[resp.length -1]});
+     
+    if(parseInt(currentTime) - parseInt(lastLogin) >= twoHoursInMillis) {
+      const notificationMessage = await this.messageService.getOpenAIForNotification(lastMessage.whom, user.userId, user.userPhoto, currentTime, lastMessage.response)
+      const notificationPayload: admin.messaging.NotificationMessagePayload = {
+          title: lastMessage.whom,
+          body: notificationMessage,
         };
 
         await this.sendNotification(user.notificationToken, notificationPayload);

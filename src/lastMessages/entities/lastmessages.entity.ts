@@ -2,9 +2,9 @@ import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
-export class Dalle extends Document {
+export class LastMessages extends Document {
   @Prop()
-  date: string;
+  whom: string;
 
   @Prop()
   user: string;
@@ -13,7 +13,7 @@ export class Dalle extends Document {
   response: string;
 
   @Prop()
-  whom: string;
+  date: string;
 }
 
-export const DalleSchema = SchemaFactory.createForClass(Dalle);
+export const LastMessageSchema = SchemaFactory.createForClass(LastMessages);

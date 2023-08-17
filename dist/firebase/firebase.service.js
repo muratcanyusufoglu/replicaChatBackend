@@ -16,23 +16,27 @@ exports.NotificationService = void 0;
 const common_1 = require("@nestjs/common");
 const admin = require("firebase-admin");
 const user_service_1 = require("../user/user.service");
+const message_service_1 = require("../lastMessages/message.service");
+const message_service_2 = require("../messages/message.service");
 let NotificationService = class NotificationService {
-    constructor(firebaseAdmin, userService) {
+    constructor(firebaseAdmin, userService, lastMessageService, messageService) {
         this.firebaseAdmin = firebaseAdmin;
         this.userService = userService;
+        this.lastMessageService = lastMessageService;
+        this.messageService = messageService;
     }
     async sendScheduledNotifications() {
         const users = await this.userService.findAll();
         const currentTime = Date.now().toString();
         const twoHoursInMillis = 2 * 60 * 60 * 1000;
         for (const user of users) {
-            console.log(user.lastLogin, ' ', currentTime, ' ', twoHoursInMillis);
             const lastLogin = user.lastLogin;
+            const lastMessage = await this.lastMessageService.findPersonalChat(user.userId).then((resp) => { return resp[resp.length - 1]; });
             if (parseInt(currentTime) - parseInt(lastLogin) >= twoHoursInMillis) {
-                console.log(user.notificationToken);
+                const notificationMessage = await this.messageService.getOpenAIForNotification(lastMessage.whom, user.userId, user.userPhoto, currentTime, lastMessage.response);
                 const notificationPayload = {
-                    title: 'Reminder',
-                    body: 'You have been logged out. Log in again to continue.',
+                    title: lastMessage.whom,
+                    body: notificationMessage,
                 };
                 await this.sendNotification(user.notificationToken, notificationPayload);
             }
@@ -50,7 +54,9 @@ let NotificationService = class NotificationService {
 NotificationService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)('FirebaseAdmin')),
-    __metadata("design:paramtypes", [Object, user_service_1.UserService])
+    __metadata("design:paramtypes", [Object, user_service_1.UserService,
+        message_service_1.LastMessageService,
+        message_service_2.MessageService])
 ], NotificationService);
 exports.NotificationService = NotificationService;
 //# sourceMappingURL=firebase.service.js.map

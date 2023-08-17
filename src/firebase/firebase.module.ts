@@ -7,6 +7,10 @@ import { ScheduledNotificationService } from './scheduled.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
+import { LastMessages, LastMessageSchema } from 'src/lastMessages/entities/lastmessages.entity';
+import { LastMessageService } from 'src/lastMessages/message.service';
+import { Messages, MessageSchema } from 'src/messages/entities/messages.entity';
+import { MessageService } from 'src/messages/message.service';
 
 
 @Module({
@@ -15,6 +19,18 @@ import { UserService } from 'src/user/user.service';
       {
         name: User.name,
         schema: UserSchema,
+      },
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: LastMessages.name,
+        schema: LastMessageSchema,
+      },
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: Messages.name,
+        schema: MessageSchema,
       },
     ]),
     ConfigModule.forRoot(),
@@ -29,7 +45,9 @@ import { UserService } from 'src/user/user.service';
     },
     NotificationService,
     ScheduledNotificationService,
-    UserService
+    UserService, 
+    LastMessageService,
+    MessageService
   ],
   exports: ['FirebaseAdmin'],
   controllers:[NotificationController]

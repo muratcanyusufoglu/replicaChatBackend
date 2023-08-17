@@ -1,4 +1,4 @@
-export declare class CreateMessageDto {
+export declare class CreateLastMessageDto {
     readonly user: string;
     readonly response: string;
     readonly date: string;

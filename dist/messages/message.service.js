@@ -48,7 +48,7 @@ let MessageService = class MessageService {
         }
         return messages;
     }
-    async getOpenAI(whom, question) {
+    async getOpenAIAnswer(whom, question) {
         const key = process.env.GPT_API_KEY;
         const configuration = new openai_1.Configuration({
             apiKey: key,
@@ -60,7 +60,7 @@ let MessageService = class MessageService {
                 messages: [
                     {
                         role: 'system',
-                        content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective.`,
+                        content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective. Your answer token number must be total maxiumum 1000 token`,
                     },
                     { role: 'user', content: question },
                 ],
@@ -71,8 +71,47 @@ let MessageService = class MessageService {
                 },
             });
             const data = completion.data.choices[0].message;
-            console.log('dataa', data, completion);
             if (data) {
+            }
+            return data;
+        }
+        catch (error) {
+            console.log('ERRORR', error);
+        }
+    }
+    async getOpenAIForNotification(whom, userId, userPhoto, date, response) {
+        const key = process.env.GPT_API_KEY;
+        const configuration = new openai_1.Configuration({
+            apiKey: key,
+        });
+        try {
+            const openai = new openai_1.OpenAIApi(configuration);
+            const completion = await openai.createChatCompletion({
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    {
+                        role: 'system',
+                        content: `You currently represent ${whom}. Please answer me as ${whom}. For a mobile app I have to push notificatioun user bacause of they are come the app."${response}". This is your last answer. Please produce a message for a notification the users come back the app. Your answer token number must be total maxiumum 150 token`,
+                    },
+                ],
+            }, {
+                timeout: 30000,
+                headers: {
+                    'Example-Header': 'example',
+                },
+            });
+            const data = completion.data.choices[0].message.content;
+            if (data) {
+                this.create({
+                    userId: userId,
+                    userPhoto: userPhoto,
+                    whom: whom,
+                    messageArray: [{
+                            message: '',
+                            response: data,
+                            date: date,
+                        }]
+                });
             }
             return data;
         }

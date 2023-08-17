@@ -44,7 +44,7 @@ export class MessageService {
     return messages;
   }
 
-  async getOpenAI(whom: string, question: string): Promise<any> {
+  async getOpenAIAnswer(whom: string, question: string): Promise<any> {
     const key = process.env.GPT_API_KEY;
     const configuration = new Configuration({
       apiKey: key,
@@ -58,13 +58,11 @@ export class MessageService {
           messages: [
             {
               role: 'system',
-              content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective.`,
+              content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective. Your answer token number must be total maxiumum 1000 token`,
             },
             { role: 'user', content: question },
           ],
-
           //prompt: question,
-          //max_tokens: 500,
         },
         {
           timeout: 30000,
@@ -74,8 +72,17 @@ export class MessageService {
         },
       );
       const data = completion.data.choices[0].message;
-      console.log('dataa', data, completion);
-      if (data) {
+      if(data){
+      //  this.create({
+      //    userId: 'asd',
+      //    userPhoto: '',
+      //    whom: whom,
+      //    messageArray:[{
+      //      message: question,
+      //      response: data,
+      //      date: 'adsa',
+      //    }]
+      //  })
       }
       return data;
     } catch (error) {
@@ -83,15 +90,50 @@ export class MessageService {
     }
   }
 
-  // create(createMessageDto: CreateMessageDto) {
-  //   const message = new this.messageModel(createMessageDto);
-  //   const findingMesage = this.findPersonalChat(
-  //     message.user,
-  //     message.userPhoto,
-  //   );
+  async getOpenAIForNotification(whom: string, userId: string,userPhoto:string,date:string, response:string): Promise<any> {
+    const key = process.env.GPT_API_KEY;
+    const configuration = new Configuration({
+      apiKey: key,
+    });
+    try {
+      const openai = new OpenAIApi(configuration);
 
-  //   return message.save();
-  // }
+      const completion = await openai.createChatCompletion(
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            {
+              role: 'system',
+              content: `You currently represent ${whom}. Please answer me as ${whom}. For a mobile app I have to push notificatioun user bacause of they are come the app."${response}". This is your last answer. Please produce a message for a notification the users come back the app. Your answer token number must be total maxiumum 150 token`,
+            },
+          ],
+          //prompt: question,
+        },
+        {
+          timeout: 30000,
+          headers: {
+            'Example-Header': 'example',
+          },
+        },
+      );
+      const data = completion.data.choices[0].message.content;
+      if(data){
+        this.create({
+          userId: userId,
+          userPhoto: userPhoto,
+          whom: whom,
+          messageArray:[{
+            message: '',
+            response: data,
+            date: date,
+          }]
+        })
+      }
+      return data;
+    } catch (error) {
+      console.log('ERRORR', error);
+    }
+  }
 
   async create(createMessageDto: CreateMessageDto) {
     const message = new this.messageModel(createMessageDto);

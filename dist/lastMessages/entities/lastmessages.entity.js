@@ -9,25 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateLastMessageDto = void 0;
-const class_validator_1 = require("class-validator");
-class CreateLastMessageDto {
-}
+exports.LastMessageSchema = exports.LastMessages = void 0;
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
+let LastMessages = class LastMessages extends mongoose_2.Document {
+};
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CreateLastMessageDto.prototype, "user", void 0);
+], LastMessages.prototype, "whom", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CreateLastMessageDto.prototype, "response", void 0);
+], LastMessages.prototype, "user", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CreateLastMessageDto.prototype, "date", void 0);
+], LastMessages.prototype, "response", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CreateLastMessageDto.prototype, "whom", void 0);
-exports.CreateLastMessageDto = CreateLastMessageDto;
-//# sourceMappingURL=create-message.dto.js.map
+], LastMessages.prototype, "date", void 0);
+LastMessages = __decorate([
+    (0, mongoose_1.Schema)()
+], LastMessages);
+exports.LastMessages = LastMessages;
+exports.LastMessageSchema = mongoose_1.SchemaFactory.createForClass(LastMessages);
+//# sourceMappingURL=lastmessages.entity.js.map

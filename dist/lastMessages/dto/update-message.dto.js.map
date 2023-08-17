@@ -1,1 +1,1 @@
-{"version":3,"file":"update-message.dto.js","sourceRoot":"","sources":["../../../src/lastMessages/dto/update-message.dto.ts"],"names":[],"mappings":";;;AAAA,uDAAmD;AACnD,6DAAwD;AACxD,MAAa,gBAAiB,SAAQ,IAAA,0BAAW,EAAC,qCAAgB,CAAC;CAAG;AAAtE,4CAAsE"}
+{"version":3,"file":"update-message.dto.js","sourceRoot":"","sources":["../../../src/lastMessages/dto/update-message.dto.ts"],"names":[],"mappings":";;;AAAA,uDAAmD;AACnD,6DAA4D;AAC5D,MAAa,gBAAiB,SAAQ,IAAA,0BAAW,EAAC,yCAAoB,CAAC;CAAG;AAA1E,4CAA0E"}

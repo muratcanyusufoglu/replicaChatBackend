@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const message_controller_1 = require("./message.controller");
 const message_service_1 = require("./message.service");
 const mongoose_1 = require("@nestjs/mongoose");
-const messages_entity_1 = require("./entities/messages.entity");
+const lastmessages_entity_1 = require("./entities/lastmessages.entity");
 const config_1 = require("@nestjs/config");
 let LastMessageModule = class LastMessageModule {
 };
@@ -20,14 +20,14 @@ LastMessageModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 {
-                    name: messages_entity_1.LastMessages.name,
-                    schema: messages_entity_1.MessageSchema,
+                    name: lastmessages_entity_1.LastMessages.name,
+                    schema: lastmessages_entity_1.LastMessageSchema,
                 },
             ]),
             config_1.ConfigModule.forRoot(),
         ],
-        controllers: [message_controller_1.MessageController],
-        providers: [message_service_1.MessageService],
+        controllers: [message_controller_1.LastMessageController],
+        providers: [message_service_1.LastMessageService],
     })
 ], LastMessageModule);
 exports.LastMessageModule = LastMessageModule;

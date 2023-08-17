@@ -8,13 +8,13 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { MessageService } from './message.service';
-import { CreateMessageDto } from './dto/create-message.dto';
+import { LastMessageService } from './message.service';
+import { CreateLastMessageDto } from './dto/create-message.dto';
 //import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('lastmessage')
-export class MessageController {
-  constructor(private readonly messageService: MessageService) {}
+export class LastMessageController {
+  constructor(private readonly messageService: LastMessageService) {}
 
   @Get()
   findAll(@Query() paginationQuery) {
@@ -33,8 +33,8 @@ export class MessageController {
   }
 
   @Post()
-  create(@Body() createMessageDto: CreateMessageDto) {
-    console.log(createMessageDto instanceof CreateMessageDto);
+  create(@Body() createMessageDto: CreateLastMessageDto) {
+    console.log(createMessageDto instanceof CreateLastMessageDto);
     return this.messageService.create(createMessageDto);
   }
 }

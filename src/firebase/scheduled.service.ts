@@ -13,3 +13,5 @@ export class ScheduledNotificationService implements OnModuleInit {
     });
   }
 }
+//0 */2 * * *
+//* * * * *
