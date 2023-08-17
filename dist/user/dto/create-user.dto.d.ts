@@ -7,4 +7,5 @@ export declare class CreateUserDto {
     readonly freeCoin: number;
     readonly finishDate: string;
     readonly lastLogin: string;
+    readonly notificationToken: string;
 }

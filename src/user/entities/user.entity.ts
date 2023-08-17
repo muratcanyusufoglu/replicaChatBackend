@@ -27,6 +27,9 @@ export class User extends Document {
 
   @Prop()
   lastLogin: string;
+  
+  @Prop()
+  notificationToken:string;
 
 }
 

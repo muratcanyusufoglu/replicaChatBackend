@@ -25,4 +25,7 @@ export class CreateUserDto {
   @IsString()
   readonly lastLogin:string;
 
+  @IsString()
+  readonly notificationToken:string;
+
 }

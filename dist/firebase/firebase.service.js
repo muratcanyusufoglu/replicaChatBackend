@@ -15,9 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotificationService = void 0;
 const common_1 = require("@nestjs/common");
 const admin = require("firebase-admin");
+const user_service_1 = require("../user/user.service");
 let NotificationService = class NotificationService {
-    constructor(firebaseAdmin) {
+    constructor(firebaseAdmin, userService) {
         this.firebaseAdmin = firebaseAdmin;
+        this.userService = userService;
+    }
+    async sendScheduledNotifications() {
+        const users = await this.userService.findAll();
+        const currentTime = Date.now().toString();
+        const twoHoursInMillis = 2 * 60 * 60 * 1000;
+        for (const user of users) {
+            console.log(user.lastLogin, ' ', currentTime, ' ', twoHoursInMillis);
+            const lastLogin = user.lastLogin;
+            if (parseInt(currentTime) - parseInt(lastLogin) >= twoHoursInMillis) {
+                console.log(user.notificationToken);
+                const notificationPayload = {
+                    title: 'Reminder',
+                    body: 'You have been logged out. Log in again to continue.',
+                };
+                await this.sendNotification(user.notificationToken, notificationPayload);
+            }
+        }
     }
     async sendNotification(deviceToken, notification) {
         try {
@@ -31,7 +50,7 @@ let NotificationService = class NotificationService {
 NotificationService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)('FirebaseAdmin')),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [Object, user_service_1.UserService])
 ], NotificationService);
 exports.NotificationService = NotificationService;
 //# sourceMappingURL=firebase.service.js.map

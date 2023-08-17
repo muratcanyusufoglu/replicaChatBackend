@@ -1,6 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { NotificationService } from './firebase.service';
 import * as admin from 'firebase-admin';
+
 @Controller('notifications')
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}

@@ -32,5 +32,6 @@ export declare class User extends Document {
     messageCoin: number;
     freeCoin: number;
     lastLogin: string;
+    notificationToken: string;
 }
 export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User>;
