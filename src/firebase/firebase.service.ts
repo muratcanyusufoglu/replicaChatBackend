@@ -17,7 +17,7 @@ export class NotificationService {
 
   async sendScheduledNotifications() {
   
-    const users = await this.userService.findAll(); // Fetch all users from your user service
+  const users = await this.userService.findAll(); // Fetch all users from your user service
   const currentTime = Date.now().toString();
   const twoHoursInMillis = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
 

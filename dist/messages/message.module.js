@@ -13,6 +13,10 @@ const message_service_1 = require("./message.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const messages_entity_1 = require("./entities/messages.entity");
 const config_1 = require("@nestjs/config");
+const user_entity_1 = require("../user/entities/user.entity");
+const user_service_1 = require("../user/user.service");
+const lastmessages_entity_1 = require("../lastMessages/entities/lastmessages.entity");
+const message_service_2 = require("../lastMessages/message.service");
 let MessageModule = class MessageModule {
 };
 MessageModule = __decorate([
@@ -24,10 +28,22 @@ MessageModule = __decorate([
                     schema: messages_entity_1.MessageSchema,
                 },
             ]),
+            mongoose_1.MongooseModule.forFeature([
+                {
+                    name: user_entity_1.User.name,
+                    schema: user_entity_1.UserSchema,
+                },
+            ]),
+            mongoose_1.MongooseModule.forFeature([
+                {
+                    name: lastmessages_entity_1.LastMessages.name,
+                    schema: lastmessages_entity_1.LastMessageSchema,
+                },
+            ]),
             config_1.ConfigModule.forRoot(),
         ],
         controllers: [message_controller_1.MessageController],
-        providers: [message_service_1.MessageService],
+        providers: [message_service_1.MessageService, user_service_1.UserService, message_service_2.LastMessageService],
     })
 ], MessageModule);
 exports.MessageModule = MessageModule;

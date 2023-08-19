@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
+import { UserCheckDto } from './dto/user-check.dto';
 //import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('messagesWhom')
@@ -21,9 +22,10 @@ export class MessageController {
     return this.messageService.findAll();
   }
 
-  @Get('gpt/:whom/:question')
-  getOpenAIAnswer(@Param('whom') whom: string, @Param('question') question: string) {
-    return this.messageService.getOpenAIAnswer(whom, question);
+  @Get('gpt')
+  getOpenAIAnswer(@Body() userCheckDto: UserCheckDto) {
+    console.log('asd', userCheckDto)
+    return this.messageService.getOpenAIAnswer(userCheckDto);
   }
 
   @Get('gptNotification/:whom/:question')

@@ -18,9 +18,13 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const messages_entity_1 = require("./entities/messages.entity");
 const openai_1 = require("openai");
+const user_service_1 = require("../user/user.service");
+const message_service_1 = require("../lastMessages/message.service");
 let MessageService = class MessageService {
-    constructor(messageModel) {
+    constructor(messageModel, userService, lastMessageService) {
         this.messageModel = messageModel;
+        this.userService = userService;
+        this.lastMessageService = lastMessageService;
     }
     findAll() {
         return this.messageModel.find().exec();
@@ -48,38 +52,65 @@ let MessageService = class MessageService {
         }
         return messages;
     }
-    async getOpenAIAnswer(whom, question) {
+    async getOpenAIAnswer(userCheckDto) {
+        const userInfo = await this.userService.findOne(userCheckDto.userId);
+        const currentTime = Date.now();
+        const packageFinishDate = Date.parse(userInfo.finishDate);
         const key = process.env.GPT_API_KEY;
         const configuration = new openai_1.Configuration({
             apiKey: key,
         });
-        try {
-            const openai = new openai_1.OpenAIApi(configuration);
-            const completion = await openai.createChatCompletion({
-                model: 'gpt-3.5-turbo',
-                messages: [
-                    {
-                        role: 'system',
-                        content: `You currently represent ${whom}. Please answer me as ${whom} and share your conversations with people from his/her perspective. Your answer token number must be total maxiumum 1000 token`,
+        if (userInfo.messageCoin > 0 && packageFinishDate > currentTime) {
+            try {
+                const openai = new openai_1.OpenAIApi(configuration);
+                const completion = await openai.createChatCompletion({
+                    model: 'gpt-3.5-turbo',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: `You currently represent ${userCheckDto.whom}. Please answer me as ${userCheckDto.whom} and share your conversations with people from his/her perspective. Your answer token number must be total of maxiumum 1000 token`,
+                        },
+                        { role: 'user', content: userCheckDto.question },
+                    ],
+                }, {
+                    timeout: 30000,
+                    headers: {
+                        'Example-Header': 'example',
                     },
-                    { role: 'user', content: question },
-                ],
-            }, {
-                timeout: 30000,
-                headers: {
-                    'Example-Header': 'example',
-                },
-            });
-            const data = completion.data.choices[0].message;
-            if (data) {
+                });
+                const data = completion.data.choices[0].message.content;
+                if (data) {
+                    this.create({
+                        userId: userCheckDto.userId,
+                        userPhoto: userCheckDto.userPhoto,
+                        whom: userCheckDto.whom,
+                        messageArray: [{
+                                message: userCheckDto.question,
+                                response: data,
+                                date: currentTime.toString(),
+                            }]
+                    }).then(async () => {
+                        await this.userService.update(userInfo.userId, { messageCoin: userInfo.messageCoin - 1 });
+                        await this.lastMessageService.create({
+                            user: userInfo.userId,
+                            response: data,
+                            date: currentTime.toString(),
+                            whom: userCheckDto.whom
+                        });
+                    }).catch(() => { return 'Oooops we have a problem. Please try again'; });
+                }
+                return data;
             }
-            return data;
+            catch (error) {
+                console.log('ERRORR', error);
+            }
         }
-        catch (error) {
-            console.log('ERRORR', error);
+        else {
+            return 'Your message token finish or your package time release.';
         }
     }
     async getOpenAIForNotification(whom, userId, userPhoto, date, response) {
+        const currentTime = Date.now();
         const key = process.env.GPT_API_KEY;
         const configuration = new openai_1.Configuration({
             apiKey: key,
@@ -91,7 +122,7 @@ let MessageService = class MessageService {
                 messages: [
                     {
                         role: 'system',
-                        content: `You currently represent ${whom}. Please answer me as ${whom}. For a mobile app I have to push notificatioun user bacause of they are come the app."${response}". This is your last answer. Please produce a message for a notification the users come back the app. Your answer token number must be total maxiumum 150 token`,
+                        content: `You currently represent ${whom}. Please answer me as ${whom}. For a mobile app I have to push notificatioun user bacause of they are come the app."${response}". This is your last answer. Please produce a message for a notification the users come back the app. Your answer token number must be total maxiumum 100 token`,
                     },
                 ],
             }, {
@@ -111,7 +142,14 @@ let MessageService = class MessageService {
                             response: data,
                             date: date,
                         }]
-                });
+                }).then(async () => {
+                    await this.lastMessageService.create({
+                        user: userId,
+                        response: data,
+                        date: currentTime.toString(),
+                        whom: whom
+                    });
+                }).catch();
             }
             return data;
         }
@@ -138,7 +176,9 @@ let MessageService = class MessageService {
 MessageService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(messages_entity_1.Messages.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        user_service_1.UserService,
+        message_service_1.LastMessageService])
 ], MessageService);
 exports.MessageService = MessageService;
 //# sourceMappingURL=message.service.js.map

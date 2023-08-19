@@ -4,6 +4,10 @@ import { MessageService } from './message.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Messages, MessageSchema } from './entities/messages.entity';
 import { ConfigModule } from '@nestjs/config';
+import { User, UserSchema } from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/user.service';
+import { LastMessageSchema, LastMessages } from 'src/lastMessages/entities/lastmessages.entity';
+import { LastMessageService } from 'src/lastMessages/message.service';
 
 @Module({
   imports: [
@@ -13,9 +17,21 @@ import { ConfigModule } from '@nestjs/config';
         schema: MessageSchema,
       },
     ]),
+    MongooseModule.forFeature([
+      {
+        name: User.name,
+        schema: UserSchema,
+      },
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: LastMessages.name,
+        schema: LastMessageSchema,
+      },
+    ]),
     ConfigModule.forRoot(),
   ],
   controllers: [MessageController],
-  providers: [MessageService],
+  providers: [MessageService, UserService, LastMessageService],
 })
 export class MessageModule {}

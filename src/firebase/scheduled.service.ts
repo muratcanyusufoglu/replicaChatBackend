@@ -8,7 +8,7 @@ export class ScheduledNotificationService implements OnModuleInit {
 
   onModuleInit() {
     // Run the task every hour to check for users eligible for notification
-    cron.schedule('0 */2 * * *', async () => {
+    cron.schedule('0 */3 * * *', async () => {
       await this.notificationService.sendScheduledNotifications();
     });
   }

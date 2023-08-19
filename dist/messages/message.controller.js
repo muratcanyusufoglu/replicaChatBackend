@@ -16,6 +16,7 @@ exports.MessageController = void 0;
 const common_1 = require("@nestjs/common");
 const message_service_1 = require("./message.service");
 const create_message_dto_1 = require("./dto/create-message.dto");
+const user_check_dto_1 = require("./dto/user-check.dto");
 let MessageController = class MessageController {
     constructor(messageService) {
         this.messageService = messageService;
@@ -23,8 +24,9 @@ let MessageController = class MessageController {
     findAll(paginationQuery) {
         return this.messageService.findAll();
     }
-    getOpenAIAnswer(whom, question) {
-        return this.messageService.getOpenAIAnswer(whom, question);
+    getOpenAIAnswer(userCheckDto) {
+        console.log('asd', userCheckDto);
+        return this.messageService.getOpenAIAnswer(userCheckDto);
     }
     getOpenAIForNotification(whom, userId, userPhoto, date, response) {
         return this.messageService.getOpenAIForNotification(whom, userId, userPhoto, date, response);
@@ -45,11 +47,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], MessageController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('gpt/:whom/:question'),
-    __param(0, (0, common_1.Param)('whom')),
-    __param(1, (0, common_1.Param)('question')),
+    (0, common_1.Get)('gpt'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [user_check_dto_1.UserCheckDto]),
     __metadata("design:returntype", void 0)
 ], MessageController.prototype, "getOpenAIAnswer", null);
 __decorate([
