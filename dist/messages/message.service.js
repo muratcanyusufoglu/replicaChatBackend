@@ -53,6 +53,7 @@ let MessageService = class MessageService {
         return messages;
     }
     async getOpenAIAnswer(userCheckDto) {
+        console.log('userr', userCheckDto);
         const userInfo = await this.userService.findOne(userCheckDto.userId);
         const currentTime = Date.now();
         const packageFinishDate = Date.parse(userInfo.finishDate);

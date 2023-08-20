@@ -25,7 +25,7 @@ let MessageController = class MessageController {
         return this.messageService.findAll();
     }
     getOpenAIAnswer(userCheckDto) {
-        console.log('asd', userCheckDto);
+        console.log('asd', userCheckDto.userId);
         return this.messageService.getOpenAIAnswer(userCheckDto);
     }
     getOpenAIForNotification(whom, userId, userPhoto, date, response) {
@@ -47,7 +47,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], MessageController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('gpt'),
+    (0, common_1.Post)('gpt'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_check_dto_1.UserCheckDto]),

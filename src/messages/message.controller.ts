@@ -22,9 +22,9 @@ export class MessageController {
     return this.messageService.findAll();
   }
 
-  @Get('gpt')
+  @Post('gpt')
   getOpenAIAnswer(@Body() userCheckDto: UserCheckDto) {
-    console.log('asd', userCheckDto)
+    console.log('asd', userCheckDto.userId)
     return this.messageService.getOpenAIAnswer(userCheckDto);
   }
 

@@ -50,6 +50,7 @@ export class MessageService {
   }
 
   async getOpenAIAnswer(userCheckDto: UserCheckDto): Promise<any> {
+    console.log('userr', userCheckDto);
     const userInfo = await this.userService.findOne(userCheckDto.userId);
     
     const currentTime = Date.now();
@@ -59,6 +60,7 @@ export class MessageService {
     const configuration = new Configuration({
       apiKey: key,
     });
+
     //control for user message number finish or package date finish.
     if(userInfo.messageCoin > 0 && packageFinishDate > currentTime){
     try {
